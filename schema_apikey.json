@@ -1,0 +1,218 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "http://example.com/example.json",
+    "type": "object",
+    "title": "The root schema",
+    "description": "The root schema comprises the entire JSON document.",
+    "default": {},
+    "examples": [
+        {
+            "rate": 100,
+            "per": 5,
+            "org_id": "default",
+            "quota_renews": 1406121006,
+            "quota_max": 60,
+            "access_rights": {
+                "myapi": {
+                    "api_name": "my api",
+                    "api_id": "myapi",
+                    "versions": [
+                        "Default"
+                    ],
+                    "allowed_urls": []
+                }
+            }
+        }
+    ],
+    "required": [
+        "rate",
+        "per",
+        "org_id",
+        "quota_renews",
+        "quota_max",
+        "access_rights"
+    ],
+    "properties": {
+        "rate": {
+            "$id": "#/properties/rate",
+            "type": "integer",
+            "title": "The rate schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0,
+            "examples": [
+                100
+            ]
+        },
+        "per": {
+            "$id": "#/properties/per",
+            "type": "integer",
+            "title": "The per schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0,
+            "examples": [
+                5
+            ]
+        },
+        "org_id": {
+            "$id": "#/properties/org_id",
+            "type": "string",
+            "title": "The org_id schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": "",
+            "examples": [
+                "default"
+            ]
+        },
+        "quota_renews": {
+            "$id": "#/properties/quota_renews",
+            "type": "integer",
+            "title": "The quota_renews schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0,
+            "examples": [
+                1406121006
+            ]
+        },
+        "quota_max": {
+            "$id": "#/properties/quota_max",
+            "type": "integer",
+            "title": "The quota_max schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0,
+            "examples": [
+                60
+            ]
+        },
+        "access_rights": {
+            "$id": "#/properties/access_rights",
+            "type": "object",
+            "title": "The access_rights schema",
+            "description": "Set the session object RL and ACL.",
+            "default": {},
+            "examples": [
+                {
+                    "myapi": {
+                        "api_name": "my api",
+                        "api_id": "myapi",
+                        "versions": [
+                            "Default"
+                        ],
+                        "allowed_urls": []
+                    }
+                }
+            ],
+            "required": [],
+            "properties": {
+                "myapi": {
+                    "$id": "#/properties/access_rights/properties/myapi",
+                    "type": "object",
+                    "title": "The myapi schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": {},
+                    "examples": [
+                        {
+                            "api_name": "my api",
+                            "api_id": "myapi",
+                            "versions": [
+                                "Default"
+                            ],
+                            "allowed_urls": []
+                        }
+                    ],
+                    "required": [
+                        "api_name",
+                        "api_id",
+                        "versions"
+                    ],
+                    "properties": {
+                        "api_name": {
+                            "$id": "#/properties/access_rights/properties/myapi/properties/api_name",
+                            "type": "string",
+                            "title": "The api_name schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": "",
+                            "examples": [
+                                "my api"
+                            ]
+                        },
+                        "api_id": {
+                            "$id": "#/properties/access_rights/properties/myapi/properties/api_id",
+                            "type": "string",
+                            "title": "The api_id schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": "",
+                            "examples": [
+                                "myapi"
+                            ]
+                        },
+                        "versions": {
+                            "$id": "#/properties/access_rights/properties/myapi/properties/versions",
+                            "type": "array",
+                            "title": "The versions schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": [],
+                            "examples": [
+                                [
+                                    "Default"
+                                ]
+                            ],
+                            "additionalItems": true,
+                            "items": {
+                                "$id": "#/properties/access_rights/properties/myapi/properties/versions/items",
+                                "anyOf": [
+                                    {
+                                        "$id": "#/properties/access_rights/properties/myapi/properties/versions/items/anyOf/0",
+                                        "type": "string",
+                                        "title": "The first anyOf schema",
+                                        "description": "An explanation about the purpose of this instance.",
+                                        "default": "",
+                                        "examples": [
+                                            "Default"
+                                        ]
+                                    }
+                                ]
+                            }
+                        },
+                        "allowed_urls": {
+                            "$id": "#/properties/access_rights/properties/myapi/properties/allowed_urls",
+                            "type": "array",
+                            "title": "The allowed_urls schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": [],
+                            "examples": [
+                                []
+                            ],
+                            "additionalItems": true,
+                            "items": {
+                                "$id": "#/properties/access_rights/properties/myapi/properties/allowed_urls/items"
+                            }
+                        },
+                        "limit": {
+                            "$id": "#/properties/access_rights/properties/myapi/properties/limit",
+                            "type": "null",
+                            "title": "The limit schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": null,
+                            "examples": [
+                                null
+                            ]
+                        },
+                        "allowance_scope": {
+                            "$id": "#/properties/access_rights/properties/myapi/properties/allowance_scope",
+                            "type": "string",
+                            "title": "The allowance_scope schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": "",
+                            "examples": [
+                                ""
+                            ]
+                        }
+                    },
+                    "additionalProperties": true
+                }
+            },
+            "additionalProperties": true
+        }
+    },
+    "additionalProperties": true
+}
