@@ -1,0 +1,240 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "http://example.com/example.json",
+    "type": "object",
+    "title": "The root schema",
+    "description": "The root schema comprises the entire JSON document.",
+    "default": {},
+    "examples": [
+        {
+            "name": "My Api",
+            "api_id": "myapi",
+            "org_id": "default",
+            "proxy": {
+                "listen_path": "/myapi/",
+                "target_url": "http://httpbin.org",
+                "strip_listen_path": true,
+                "preserve_host_header": true
+            },
+            "version_data": {
+                "versions": {
+                    "Default": {
+                        "name": "Default"
+                    }
+                },
+                "default_version": "",
+                "not_versioned": true
+            },
+            "active": true,
+            "use_keyless": true
+        }
+    ],
+    "required": [
+        "name",
+        "api_id",
+        "org_id",
+        "proxy",
+        "version_data",
+        "active",
+        "use_keyless"
+    ],
+    "properties": {
+        "name": {
+            "$id": "#/properties/name",
+            "type": "string",
+            "title": "The name schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": "",
+            "examples": [
+                "myapi"
+            ]
+        },
+        "api_id": {
+            "$id": "#/properties/api_id",
+            "type": "string",
+            "title": "The api_id schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": "",
+            "examples": [
+                "myapi"
+            ]
+        },
+        "org_id": {
+            "$id": "#/properties/org_id",
+            "type": "string",
+            "title": "The org_id schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": "",
+            "examples": [
+                "default"
+            ]
+        },
+        "proxy": {
+            "$id": "#/properties/proxy",
+            "type": "object",
+            "title": "The proxy schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": {},
+            "examples": [
+                {
+                    "listen_path": "/myapi/",
+                    "target_url": "http://httpbin.org",
+                    "strip_listen_path": true,
+                    "preserve_host_header": true
+                }
+            ],
+            "required": [
+                "listen_path",
+                "target_url",
+                "strip_listen_path",
+                "preserve_host_header"
+            ],
+            "properties": {
+                "listen_path": {
+                    "$id": "#/properties/proxy/properties/listen_path",
+                    "type": "string",
+                    "title": "The listen_path schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": "",
+                    "examples": [
+                        "/myapi/"
+                    ]
+                },
+                "target_url": {
+                    "$id": "#/properties/proxy/properties/target_url",
+                    "type": "string",
+                    "title": "The target_url schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": "",
+                    "examples": [
+                        "http://httpbin.org"
+                    ]
+                },
+                "strip_listen_path": {
+                    "$id": "#/properties/proxy/properties/strip_listen_path",
+                    "type": "boolean",
+                    "title": "The strip_listen_path schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": false,
+                    "examples": [
+                        true
+                    ]
+                },
+                "preserve_host_header": {
+                    "$id": "#/properties/proxy/properties/preserve_host_header",
+                    "type": "boolean",
+                    "title": "The preserve_host_header schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": false,
+                    "examples": [
+                        true
+                    ]
+                }
+            },
+            "additionalProperties": true
+        },
+        "version_data": {
+            "$id": "#/properties/version_data",
+            "type": "object",
+            "title": "The version_data schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": {},
+            "examples": [
+                {
+                    "versions": {
+                        "Default": {
+                            "name": "Default"
+                        }
+                    },
+                    "not_versioned": true
+                }
+            ],
+            "required": [
+                "versions",
+                "not_versioned"
+            ],
+            "properties": {
+                "versions": {
+                    "$id": "#/properties/version_data/properties/versions",
+                    "type": "object",
+                    "title": "The versions schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": {},
+                    "examples": [
+                        {
+                            "Default": {
+                                "name": "Default"
+                            }
+                        }
+                    ],
+                    "required": [
+                        "Default"
+                    ],
+                    "properties": {
+                        "Default": {
+                            "$id": "#/properties/version_data/properties/versions/properties/Default",
+                            "type": "object",
+                            "title": "The Default schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": {},
+                            "examples": [
+                                {
+                                    "name": "Default"
+                                }
+                            ],
+                            "required": [
+                                "name"
+                            ],
+                            "properties": {
+                                "name": {
+                                    "$id": "#/properties/version_data/properties/versions/properties/Default/properties/name",
+                                    "type": "string",
+                                    "title": "The name schema",
+                                    "description": "An explanation about the purpose of this instance.",
+                                    "default": "",
+                                    "examples": [
+                                        "Default"
+                                    ]
+                                }
+                            },
+                            "additionalProperties": true
+                        }
+                    },
+                    "additionalProperties": true
+                },
+                "not_versioned": {
+                    "$id": "#/properties/version_data/properties/not_versioned",
+                    "type": "boolean",
+                    "title": "The not_versioned schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": false,
+                    "examples": [
+                        true
+                    ]
+                }
+            },
+            "additionalProperties": true
+        },
+        "active": {
+            "$id": "#/properties/active",
+            "type": "boolean",
+            "title": "The active schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": false,
+            "examples": [
+                true
+            ]
+        },
+        "use_keyless": {
+            "$id": "#/properties/use_keyless",
+            "type": "boolean",
+            "title": "The use_keyless schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": false,
+            "examples": [
+                true
+            ]
+        }
+    },
+    "additionalProperties": true
+}
