@@ -4,7 +4,21 @@
     "type": "object",
     "title": "The root schema",
     "description": "The root schema comprises the entire JSON document.",
-    "default": {},
+    "default": {
+        "rate": 50,
+        "per": 5,
+        "org_id": "default",
+        "quota_max": 60,
+        "access_rights": {
+            "myapi": {
+                "api_name": "my api",
+                "api_id": "myapi",
+                "versions": [
+                    "Default"
+                ]
+            }
+        }
+    },
     "examples": [
         {
             "rate": 100,
@@ -28,7 +42,6 @@
         "rate",
         "per",
         "org_id",
-        "quota_renews",
         "quota_max",
         "access_rights"
     ],
@@ -58,9 +71,9 @@
             "type": "string",
             "title": "The org_id schema",
             "description": "An explanation about the purpose of this instance.",
-            "default": "",
+            "default": "default",
             "examples": [
-                "default"
+                "myorg"
             ]
         },
         "quota_renews": {
@@ -88,7 +101,15 @@
             "type": "object",
             "title": "The access_rights schema",
             "description": "Set the session object RL and ACL.",
-            "default": {},
+            "default": {
+                "myapi": {
+                    "api_name": "my api",
+                    "api_id": "myapi",
+                    "versions": [
+                        "Default"
+                    ]
+                }
+            },
             "examples": [
                 {
                     "myapi": {
