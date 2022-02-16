@@ -78,8 +78,11 @@ To write in "Tyk language" and feel it's native to your IDE config the settings 
    - Tyk key definition - use the format `"apikey.*.json"`, for example `"apikey.httpbin-key.json"`
    - Tyk gateway OSS config file - use the format `"tyk.*.conf"`, for example `"tyk.gateway.conf"`
 
+
 ## Goland
 
+Open the project's preferences (`cmd+,`) and under JSON Schema mapping set the access of Goland to the json schemas and the file formats per the example in this screenshot:
+<img width="1180" alt="image" src="https://user-images.githubusercontent.com/3155222/154376405-76aec788-6c52-4b66-8141-c28de0651909.png">
 
 
 
