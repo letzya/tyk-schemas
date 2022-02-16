@@ -4,30 +4,28 @@
     "type": "object",
     "title": "The root schema",
     "description": "The root schema comprises the entire JSON document.",
-    "default": {},
-    "examples": [
-        {
-            "name": "My Api",
-            "api_id": "myapi",
-            "org_id": "default",
-            "proxy": {
-                "listen_path": "/myapi/",
-                "target_url": "http://httpbin.org",
-                "strip_listen_path": true,
-                "preserve_host_header": true
+    "default": {
+        "name": "My Api",
+        "api_id": "myapi",
+        "org_id": "default",
+        "proxy": {
+            "listen_path": "/myapi/",
+            "target_url": "http://httpbin.org",
+            "strip_listen_path": true,
+            "preserve_host_header": true
+        },
+        "version_data": {
+            "versions": {
+                "Default": {
+                    "name": "Default"
+                }
             },
-            "version_data": {
-                "versions": {
-                    "Default": {
-                        "name": "Default"
-                    }
-                },
-                "not_versioned": true
-            },
-            "active": true,
-            "use_keyless": true
-        }
-    ],
+            "not_versioned": true
+        },
+        "active": true,
+        "use_keyless": true
+    },
+    "examples": [],
     "required": [
         "name",
         "proxy",
@@ -283,7 +281,7 @@
                     "default": 5
                 }
             }
-        },
+        }
     },
     "additionalProperties": true
 }
