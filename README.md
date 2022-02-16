@@ -31,10 +31,11 @@ You can use these schemas in your IDE or favourite editor to get autocompletion 
 # Usage
 To write in "Tyk language" and feel it's native to your IDE config the settings in your IDE to use the JSON schemas in this repository
 
-## VS Code
-Edit your settings.json as explained [here](https://code.visualstudio.com/docs/languages/json#_mapping-to-a-schema-in-the-workspace).
+## VSCode
 
-Add the following lines to your `setting.json`:
+1. Open your VSCode `settings.json` as explained [here](https://code.visualstudio.com/docs/languages/json#_mapping-to-a-schema-in-the-workspace).
+
+2. Add the following lines to your `setting.json`:
 
 ```json
 "json.schemas": [
@@ -58,13 +59,24 @@ Add the following lines to your `setting.json`:
         },
     ],
 ```
-and also 
+
+3. If you want intellisense to work for Tyk's config files you need VSCode to recognice `.conf` extension as json. 
+   To achieve that add the following:
 ```json
     "files.associations": {
         "*.conf": "json"
     }
 ```
 
+4. `cmd+shift+p` to Reload the window
+
+5. Create files with the name convenstions you used in step #2
+   - Tyk API definition - use the format `"apidef.*.json"`, for example `"apidef.httpbin.json"`
+   - Tyk key definition - use the format `"apikey.*.json"`, for example `"apikey.httpbin-key.json"`
+   - Tyk gateway OSS config file - use the format `"tyk.*.conf"`, for example `"tyk.gateway.conf"`
+
 ## Goland
+
+
 
 
