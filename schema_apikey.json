@@ -102,9 +102,9 @@
             "title": "The access_rights schema",
             "description": "Set the session object RL and ACL.",
             "default": {
-                "myapi": {
+                "myapiid": {
                     "api_name": "my api",
-                    "api_id": "myapi",
+                    "api_id": "myapiid",
                     "versions": [
                         "Default"
                     ]
