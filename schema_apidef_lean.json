@@ -22,7 +22,6 @@
                         "name": "Default"
                     }
                 },
-                "default_version": "",
                 "not_versioned": true
             },
             "active": true,
@@ -31,10 +30,10 @@
     ],
     "required": [
         "name",
-        "api_id",
-        "org_id",
         "proxy",
         "version_data",
+        "api_id",
+        "org_id",
         "active",
         "use_keyless"
     ],
@@ -138,15 +137,22 @@
             "type": "object",
             "title": "The version_data schema",
             "description": "An explanation about the purpose of this instance.",
-            "default": {},
+            "default": {
+                "versions": {
+                    "Default": {
+                        "name": "Default"
+                    }
+                },
+                "not_versioned": true
+            },
             "examples": [
                 {
                     "versions": {
-                        "Default": {
-                            "name": "Default"
+                        "v1": {
+                            "name": "v1"
                         }
                     },
-                    "not_versioned": true
+                    "not_versioned": false
                 }
             ],
             "required": [
@@ -211,6 +217,10 @@
                     "examples": [
                         true
                     ]
+                },
+                "default_version": {
+                    "type": "string",
+                    "id": "#/properties/version_data/properties/default_version"
                 }
             },
             "additionalProperties": true
@@ -234,7 +244,46 @@
             "examples": [
                 true
             ]
-        }
+        },
+        "config_data": {
+            "$id": "#/properties/config_data",
+            "type": [
+                "object",
+                "null"
+            ],
+            "title": "The config_data schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": "",
+            "examples": [
+                {
+                    "key1": "value1",
+                    "key2": "value2"
+                }
+            ]
+        },
+        "global_rate_limit": {
+            "$id": "#/properties/global_rate_limit",
+            "type": [
+                "object",
+                "null"
+            ],
+            "title": "The config_data global_rate_limit",
+            "description": "An explanation about the purpose of this instance.",
+            "properties": {
+                "rate": {
+                    "$id": "#/properties/global_rate_limit/rate",
+                    "type": "number",
+                    "title": "The number of total requests allowed to this API across all the keys",
+                    "default": 100
+                },
+                "per": {
+                    "$id": "#/properties/global_rate_limit/per",
+                    "type": "number",
+                    "title": "The number of seconds to the number of requests to this API across all the keys",
+                    "default": 5
+                }
+            }
+        },
     },
     "additionalProperties": true
 }
