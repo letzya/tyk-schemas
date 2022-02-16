@@ -27,6 +27,9 @@ You can use these schemas in your IDE or favourite editor to get autocompletion 
 | Tyk OSS gateway config file | ⚠️ | NA | - |
 | Tyk Pro gateway config file | ❌️ | NA | - |
 | Tyk hybrid gateway config file | ❌️ | NA | - |
+| Tyk pump config file | ❌️ | NA | - |
+| Tyk dashboard config file | ❌️ | NA | - |
+| Tyk Identity broker config file | ❌️ | NA | - |
 
 # Usage
 To write in "Tyk language" and feel it's native to your IDE config the settings in your IDE to use the JSON schemas in this repository
