@@ -1,0 +1,1627 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "http://example.com/example.json",
+    "type": "object",
+    "title": "JSON Schema for Tyk API OAS definition",
+    "description": "The root schema of Tyk API OAS definition JSON document.",
+    "default": {},
+    "examples": [
+        {
+            "components": {
+                "securitySchemes": {
+                    "header_key": {
+                        "in": "header",
+                        "name": "Authorization",
+                        "type": "apiKey"
+                    }
+                }
+            },
+            "info": {
+                "title": "Tyk API OAS Definition",
+                "version": "v0.0.1-alpha"
+            },
+            "openapi": "3.0.2",
+            "paths": {
+                "/get": {
+                    "get": {
+                        "description": "test get path",
+                        "operationId": "getget",
+                        "responses": {
+                            "200": {
+                                "description": ""
+                            }
+                        },
+                        "summary": "test"
+                    }
+                },
+                "/status/{id}": {
+                    "get": {
+                        "description": "test status path",
+                        "operationId": "getstatusid",
+                        "parameters": [
+                            {
+                                "in": "path",
+                                "name": "id",
+                                "required": true,
+                                "schema": {}
+                            }
+                        ],
+                        "responses": {
+                            "200": {
+                                "description": ""
+                            }
+                        },
+                        "summary": "test"
+                    }
+                }
+            },
+            "security": [
+                {
+                    "header_key": []
+                }
+            ],
+            "servers": [
+                {
+                    "url": "http://localhost:8181/test/"
+                }
+            ],
+            "x-tyk-api-gateway": {
+                "info": {
+                    "id": "6fb1791a8d30482b7238c7ee881d6b13",
+                    "dbId": "62060e6e86341f72ca413229",
+                    "orgId": "change-me-to-org-id",
+                    "name": "test",
+                    "state": {
+                        "active": true
+                    }
+                },
+                "upstream": {
+                    "url": "http://httpbin.org/"
+                },
+                "server": {
+                    "listenPath": {
+                        "value": "/test/",
+                        "strip": true
+                    },
+                    "slug": "test",
+                    "authentication": {
+                        "enabled": true,
+                        "token": {
+                            "enabled": true,
+                            "header": {
+                                "name": ""
+                            }
+                        }
+                    }
+                },
+                "middleware": {
+                    "global": {
+                        "cors": {
+                            "enabled": true,
+                            "maxAge": 24,
+                            "allowedHeaders": [
+                                "Accept",
+                                "Content-Type",
+                                "Origin",
+                                "X-Requested-With",
+                                "Authorization"
+                            ],
+                            "allowedOrigins": [
+                                "*"
+                            ],
+                            "allowedMethods": [
+                                "GET",
+                                "HEAD",
+                                "POST"
+                            ]
+                        },
+                        "cache": {
+                            "enabled": true,
+                            "timeout": 60
+                        }
+                    },
+                    "operations": {
+                        "getget": {
+                            "allow": {
+                                "enabled": true
+                            }
+                        },
+                        "getstatusid": {
+                            "allow": {
+                                "enabled": true
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    ],
+    "required": [
+        "info",
+        "openapi"
+    ],
+    "anyOf": [
+        {
+            "required": [
+                "paths"
+            ]
+        },
+        {
+            "required": [
+                "components"
+            ]
+        },
+        {
+            "required": [
+                "webhooks"
+            ]
+        }
+    ],
+    "properties": {
+        "components": {
+            "$id": "#/properties/components",
+            "type": "object",
+            "title": "The components schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": {},
+            "examples": [
+                {
+                    "securitySchemes": {
+                        "header_key": {
+                            "in": "header",
+                            "name": "Authorization",
+                            "type": "apiKey"
+                        }
+                    }
+                }
+            ],
+            "required": [
+                "securitySchemes"
+            ],
+            "properties": {
+                "securitySchemes": {
+                    "$id": "#/properties/components/properties/securitySchemes",
+                    "type": "object",
+                    "title": "The securitySchemes schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": {},
+                    "examples": [
+                        {
+                            "header_key": {
+                                "in": "header",
+                                "name": "Authorization",
+                                "type": "apiKey"
+                            }
+                        }
+                    ],
+                    "required": [
+                        "header_key"
+                    ],
+                    "properties": {
+                        "header_key": {
+                            "$id": "#/properties/components/properties/securitySchemes/properties/header_key",
+                            "type": "object",
+                            "title": "The header_key schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": {},
+                            "examples": [
+                                {
+                                    "in": "header",
+                                    "name": "Authorization",
+                                    "type": "apiKey"
+                                }
+                            ],
+                            "required": [
+                                "in",
+                                "name",
+                                "type"
+                            ],
+                            "properties": {
+                                "in": {
+                                    "$id": "#/properties/components/properties/securitySchemes/properties/header_key/properties/in",
+                                    "type": "string",
+                                    "title": "The in schema",
+                                    "description": "An explanation about the purpose of this instance.",
+                                    "default": "",
+                                    "examples": [
+                                        "header"
+                                    ]
+                                },
+                                "name": {
+                                    "$id": "#/properties/components/properties/securitySchemes/properties/header_key/properties/name",
+                                    "type": "string",
+                                    "title": "The name schema",
+                                    "description": "An explanation about the purpose of this instance.",
+                                    "default": "",
+                                    "examples": [
+                                        "Authorization"
+                                    ]
+                                },
+                                "type": {
+                                    "$id": "#/properties/components/properties/securitySchemes/properties/header_key/properties/type",
+                                    "type": "string",
+                                    "title": "The type schema",
+                                    "description": "An explanation about the purpose of this instance.",
+                                    "default": "",
+                                    "examples": [
+                                        "apiKey"
+                                    ]
+                                }
+                            },
+                            "additionalProperties": true
+                        }
+                    },
+                    "additionalProperties": true
+                }
+            },
+            "additionalProperties": true
+        },
+        "info": {
+            "$id": "#/properties/info",
+            "type": "object",
+            "title": "The info schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": {},
+            "examples": [
+                {
+                    "title": "Tyk API OAS Definition",
+                    "version": "v0.0.1-alpha"
+                }
+            ],
+            "required": [
+                "title",
+                "version"
+            ],
+            "properties": {
+                "title": {
+                    "$id": "#/properties/info/properties/title",
+                    "type": "string",
+                    "title": "The title schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": "",
+                    "examples": [
+                        "Tyk API OAS Definition"
+                    ]
+                },
+                "version": {
+                    "$id": "#/properties/info/properties/version",
+                    "type": "string",
+                    "title": "The version schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": "",
+                    "examples": [
+                        "v0.0.1-alpha"
+                    ]
+                }
+            },
+            "additionalProperties": true
+        },
+        "openapi": {
+            "$id": "#/properties/openapi",
+            "type": "string",
+            "pattern": "^3\\.1\\.\\d+(-.+)?$",
+            "title": "The openapi schema",
+            "examples": [
+                "3.0.2"
+            ]
+        },
+        "paths": {
+            "$id": "#/properties/paths",
+            "type": "object",
+            "title": "The paths schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": {},
+            "examples": [
+                {
+                    "/get": {
+                        "get": {
+                            "description": "test get path",
+                            "operationId": "getget",
+                            "responses": {
+                                "200": {
+                                    "description": ""
+                                }
+                            },
+                            "summary": "test"
+                        }
+                    },
+                    "/status/{id}": {
+                        "get": {
+                            "description": "test status path",
+                            "operationId": "getstatusid",
+                            "parameters": [
+                                {
+                                    "in": "path",
+                                    "name": "id",
+                                    "required": true,
+                                    "schema": {}
+                                }
+                            ],
+                            "responses": {
+                                "200": {
+                                    "description": ""
+                                }
+                            },
+                            "summary": "test"
+                        }
+                    }
+                }
+            ],
+            "required": [
+                "/get",
+                "/status/{id}"
+            ],
+            "properties": {
+                "/get": {
+                    "$id": "#/properties/paths/properties//get",
+                    "type": "object",
+                    "title": "The /get schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": {},
+                    "examples": [
+                        {
+                            "get": {
+                                "description": "test get path",
+                                "operationId": "getget",
+                                "responses": {
+                                    "200": {
+                                        "description": ""
+                                    }
+                                },
+                                "summary": "test"
+                            }
+                        }
+                    ],
+                    "required": [
+                        "get"
+                    ],
+                    "properties": {
+                        "get": {
+                            "$id": "#/properties/paths/properties//get/properties/get",
+                            "type": "object",
+                            "title": "The get schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": {},
+                            "examples": [
+                                {
+                                    "description": "test get path",
+                                    "operationId": "getget",
+                                    "responses": {
+                                        "200": {
+                                            "description": ""
+                                        }
+                                    },
+                                    "summary": "test"
+                                }
+                            ],
+                            "required": [
+                                "description",
+                                "operationId",
+                                "responses",
+                                "summary"
+                            ],
+                            "properties": {
+                                "description": {
+                                    "$id": "#/properties/paths/properties//get/properties/get/properties/description",
+                                    "type": "string",
+                                    "title": "The description schema",
+                                    "description": "An explanation about the purpose of this instance.",
+                                    "default": "",
+                                    "examples": [
+                                        "test get path"
+                                    ]
+                                },
+                                "operationId": {
+                                    "$id": "#/properties/paths/properties//get/properties/get/properties/operationId",
+                                    "type": "string",
+                                    "title": "The operationId schema",
+                                    "description": "An explanation about the purpose of this instance.",
+                                    "default": "",
+                                    "examples": [
+                                        "getget"
+                                    ]
+                                },
+                                "responses": {
+                                    "$id": "#/properties/paths/properties//get/properties/get/properties/responses",
+                                    "type": "object",
+                                    "title": "The responses schema",
+                                    "description": "An explanation about the purpose of this instance.",
+                                    "default": {},
+                                    "examples": [
+                                        {
+                                            "200": {
+                                                "description": ""
+                                            }
+                                        }
+                                    ],
+                                    "required": [
+                                        "200"
+                                    ],
+                                    "properties": {
+                                        "200": {
+                                            "$id": "#/properties/paths/properties//get/properties/get/properties/responses/properties/200",
+                                            "type": "object",
+                                            "title": "The 200 schema",
+                                            "description": "An explanation about the purpose of this instance.",
+                                            "default": {},
+                                            "examples": [
+                                                {
+                                                    "description": ""
+                                                }
+                                            ],
+                                            "required": [
+                                                "description"
+                                            ],
+                                            "properties": {
+                                                "description": {
+                                                    "$id": "#/properties/paths/properties//get/properties/get/properties/responses/properties/200/properties/description",
+                                                    "type": "string",
+                                                    "title": "The description schema",
+                                                    "description": "An explanation about the purpose of this instance.",
+                                                    "default": "",
+                                                    "examples": [
+                                                        ""
+                                                    ]
+                                                }
+                                            },
+                                            "additionalProperties": true
+                                        }
+                                    },
+                                    "additionalProperties": true
+                                },
+                                "summary": {
+                                    "$id": "#/properties/paths/properties//get/properties/get/properties/summary",
+                                    "type": "string",
+                                    "title": "The summary schema",
+                                    "description": "An explanation about the purpose of this instance.",
+                                    "default": "",
+                                    "examples": [
+                                        "test"
+                                    ]
+                                }
+                            },
+                            "additionalProperties": true
+                        }
+                    },
+                    "additionalProperties": true
+                },
+                "/status/{id}": {
+                    "$id": "#/properties/paths/properties//status/%7Bid%7D",
+                    "type": "object",
+                    "title": "The /status/{id} schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": {},
+                    "examples": [
+                        {
+                            "get": {
+                                "description": "test status path",
+                                "operationId": "getstatusid",
+                                "parameters": [
+                                    {
+                                        "in": "path",
+                                        "name": "id",
+                                        "required": true,
+                                        "schema": {}
+                                    }
+                                ],
+                                "responses": {
+                                    "200": {
+                                        "description": ""
+                                    }
+                                },
+                                "summary": "test"
+                            }
+                        }
+                    ],
+                    "required": [
+                        "get"
+                    ],
+                    "properties": {
+                        "get": {
+                            "$id": "#/properties/paths/properties//status/%7Bid%7D/properties/get",
+                            "type": "object",
+                            "title": "The get schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": {},
+                            "examples": [
+                                {
+                                    "description": "test status path",
+                                    "operationId": "getstatusid",
+                                    "parameters": [
+                                        {
+                                            "in": "path",
+                                            "name": "id",
+                                            "required": true,
+                                            "schema": {}
+                                        }
+                                    ],
+                                    "responses": {
+                                        "200": {
+                                            "description": ""
+                                        }
+                                    },
+                                    "summary": "test"
+                                }
+                            ],
+                            "required": [
+                                "description",
+                                "operationId",
+                                "parameters",
+                                "responses",
+                                "summary"
+                            ],
+                            "properties": {
+                                "description": {
+                                    "$id": "#/properties/paths/properties//status/%7Bid%7D/properties/get/properties/description",
+                                    "type": "string",
+                                    "title": "The description schema",
+                                    "description": "An explanation about the purpose of this instance.",
+                                    "default": "",
+                                    "examples": [
+                                        "test status path"
+                                    ]
+                                },
+                                "operationId": {
+                                    "$id": "#/properties/paths/properties//status/%7Bid%7D/properties/get/properties/operationId",
+                                    "type": "string",
+                                    "title": "The operationId schema",
+                                    "description": "An explanation about the purpose of this instance.",
+                                    "default": "",
+                                    "examples": [
+                                        "getstatusid"
+                                    ]
+                                },
+                                "parameters": {
+                                    "$id": "#/properties/paths/properties//status/%7Bid%7D/properties/get/properties/parameters",
+                                    "type": "array",
+                                    "title": "The parameters schema",
+                                    "description": "An explanation about the purpose of this instance.",
+                                    "default": [],
+                                    "examples": [
+                                        [
+                                            {
+                                                "in": "path",
+                                                "name": "id",
+                                                "required": true,
+                                                "schema": {}
+                                            }
+                                        ]
+                                    ],
+                                    "additionalItems": true,
+                                    "items": {
+                                        "$id": "#/properties/paths/properties//status/%7Bid%7D/properties/get/properties/parameters/items",
+                                        "anyOf": [
+                                            {
+                                                "$id": "#/properties/paths/properties//status/%7Bid%7D/properties/get/properties/parameters/items/anyOf/0",
+                                                "type": "object",
+                                                "title": "The first anyOf schema",
+                                                "description": "An explanation about the purpose of this instance.",
+                                                "default": {},
+                                                "examples": [
+                                                    {
+                                                        "in": "path",
+                                                        "name": "id",
+                                                        "required": true,
+                                                        "schema": {}
+                                                    }
+                                                ],
+                                                "required": [
+                                                    "in",
+                                                    "name",
+                                                    "required",
+                                                    "schema"
+                                                ],
+                                                "properties": {
+                                                    "in": {
+                                                        "$id": "#/properties/paths/properties//status/%7Bid%7D/properties/get/properties/parameters/items/anyOf/0/properties/in",
+                                                        "type": "string",
+                                                        "title": "The in schema",
+                                                        "description": "An explanation about the purpose of this instance.",
+                                                        "default": "",
+                                                        "examples": [
+                                                            "path"
+                                                        ]
+                                                    },
+                                                    "name": {
+                                                        "$id": "#/properties/paths/properties//status/%7Bid%7D/properties/get/properties/parameters/items/anyOf/0/properties/name",
+                                                        "type": "string",
+                                                        "title": "The name schema",
+                                                        "description": "An explanation about the purpose of this instance.",
+                                                        "default": "",
+                                                        "examples": [
+                                                            "id"
+                                                        ]
+                                                    },
+                                                    "required": {
+                                                        "$id": "#/properties/paths/properties//status/%7Bid%7D/properties/get/properties/parameters/items/anyOf/0/properties/required",
+                                                        "type": "boolean",
+                                                        "title": "The required schema",
+                                                        "description": "An explanation about the purpose of this instance.",
+                                                        "default": false,
+                                                        "examples": [
+                                                            true
+                                                        ]
+                                                    },
+                                                    "schema": {
+                                                        "$id": "#/properties/paths/properties//status/%7Bid%7D/properties/get/properties/parameters/items/anyOf/0/properties/schema",
+                                                        "type": "object",
+                                                        "title": "The schema schema",
+                                                        "description": "An explanation about the purpose of this instance.",
+                                                        "default": {},
+                                                        "examples": [
+                                                            {}
+                                                        ],
+                                                        "required": [],
+                                                        "additionalProperties": true
+                                                    }
+                                                },
+                                                "additionalProperties": true
+                                            }
+                                        ]
+                                    }
+                                },
+                                "responses": {
+                                    "$id": "#/properties/paths/properties//status/%7Bid%7D/properties/get/properties/responses",
+                                    "type": "object",
+                                    "title": "The responses schema",
+                                    "description": "An explanation about the purpose of this instance.",
+                                    "default": {},
+                                    "examples": [
+                                        {
+                                            "200": {
+                                                "description": ""
+                                            }
+                                        }
+                                    ],
+                                    "required": [
+                                        "200"
+                                    ],
+                                    "properties": {
+                                        "200": {
+                                            "$id": "#/properties/paths/properties//status/%7Bid%7D/properties/get/properties/responses/properties/200",
+                                            "type": "object",
+                                            "title": "The 200 schema",
+                                            "description": "An explanation about the purpose of this instance.",
+                                            "default": {},
+                                            "examples": [
+                                                {
+                                                    "description": ""
+                                                }
+                                            ],
+                                            "required": [
+                                                "description"
+                                            ],
+                                            "properties": {
+                                                "description": {
+                                                    "$id": "#/properties/paths/properties//status/%7Bid%7D/properties/get/properties/responses/properties/200/properties/description",
+                                                    "type": "string",
+                                                    "title": "The description schema",
+                                                    "description": "An explanation about the purpose of this instance.",
+                                                    "default": "",
+                                                    "examples": [
+                                                        ""
+                                                    ]
+                                                }
+                                            },
+                                            "additionalProperties": true
+                                        }
+                                    },
+                                    "additionalProperties": true
+                                },
+                                "summary": {
+                                    "$id": "#/properties/paths/properties//status/%7Bid%7D/properties/get/properties/summary",
+                                    "type": "string",
+                                    "title": "The summary schema",
+                                    "description": "An explanation about the purpose of this instance.",
+                                    "default": "",
+                                    "examples": [
+                                        "test"
+                                    ]
+                                }
+                            },
+                            "additionalProperties": true
+                        }
+                    },
+                    "additionalProperties": true
+                }
+            },
+            "additionalProperties": true
+        },
+        "security": {
+            "$id": "#/properties/security",
+            "type": "array",
+            "title": "The security schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": [],
+            "examples": [
+                [
+                    {
+                        "header_key": []
+                    }
+                ]
+            ],
+            "additionalItems": true,
+            "items": {
+                "$id": "#/properties/security/items",
+                "anyOf": [
+                    {
+                        "$id": "#/properties/security/items/anyOf/0",
+                        "type": "object",
+                        "title": "The first anyOf schema",
+                        "description": "An explanation about the purpose of this instance.",
+                        "default": {},
+                        "examples": [
+                            {
+                                "header_key": []
+                            }
+                        ],
+                        "required": [
+                            "header_key"
+                        ],
+                        "properties": {
+                            "header_key": {
+                                "$id": "#/properties/security/items/anyOf/0/properties/header_key",
+                                "type": "array",
+                                "title": "The header_key schema",
+                                "description": "An explanation about the purpose of this instance.",
+                                "default": [],
+                                "examples": [
+                                    []
+                                ],
+                                "additionalItems": true,
+                                "items": {
+                                    "$id": "#/properties/security/items/anyOf/0/properties/header_key/items"
+                                }
+                            }
+                        },
+                        "additionalProperties": true
+                    }
+                ]
+            }
+        },
+        "servers": {
+            "$id": "#/properties/servers",
+            "type": "array",
+            "title": "The servers schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": [],
+            "examples": [
+                [
+                    {
+                        "url": "http://localhost:8181/test/"
+                    }
+                ]
+            ],
+            "additionalItems": true,
+            "items": {
+                "$id": "#/properties/servers/items",
+                "anyOf": [
+                    {
+                        "$id": "#/properties/servers/items/anyOf/0",
+                        "type": "object",
+                        "title": "The first anyOf schema",
+                        "description": "An explanation about the purpose of this instance.",
+                        "default": {},
+                        "examples": [
+                            {
+                                "url": "http://localhost:8181/test/"
+                            }
+                        ],
+                        "required": [
+                            "url"
+                        ],
+                        "properties": {
+                            "url": {
+                                "$id": "#/properties/servers/items/anyOf/0/properties/url",
+                                "type": "string",
+                                "title": "The url schema",
+                                "description": "An explanation about the purpose of this instance.",
+                                "default": "",
+                                "examples": [
+                                    "http://localhost:8181/test/"
+                                ]
+                            }
+                        },
+                        "additionalProperties": true
+                    }
+                ]
+            }
+        },
+        "x-tyk-api-gateway": {
+            "$id": "#/properties/x-tyk-api-gateway",
+            "type": "object",
+            "title": "The x-tyk-api-gateway schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": {},
+            "examples": [
+                {
+                    "info": {
+                        "id": "6fb1791a8d30482b7238c7ee881d6b13",
+                        "dbId": "62060e6e86341f72ca413229",
+                        "orgId": "change-me-to-org-id",
+                        "name": "test",
+                        "state": {
+                            "active": true
+                        }
+                    },
+                    "upstream": {
+                        "url": "http://httpbin.org/"
+                    },
+                    "server": {
+                        "listenPath": {
+                            "value": "/test/",
+                            "strip": true
+                        },
+                        "slug": "test",
+                        "authentication": {
+                            "enabled": true,
+                            "token": {
+                                "enabled": true,
+                                "header": {
+                                    "name": ""
+                                }
+                            }
+                        }
+                    },
+                    "middleware": {
+                        "global": {
+                            "cors": {
+                                "enabled": true,
+                                "maxAge": 24,
+                                "allowedHeaders": [
+                                    "Accept",
+                                    "Content-Type",
+                                    "Origin",
+                                    "X-Requested-With",
+                                    "Authorization"
+                                ],
+                                "allowedOrigins": [
+                                    "*"
+                                ],
+                                "allowedMethods": [
+                                    "GET",
+                                    "HEAD",
+                                    "POST"
+                                ]
+                            },
+                            "cache": {
+                                "enabled": true,
+                                "timeout": 60
+                            }
+                        },
+                        "operations": {
+                            "getget": {
+                                "allow": {
+                                    "enabled": true
+                                }
+                            },
+                            "getstatusid": {
+                                "allow": {
+                                    "enabled": true
+                                }
+                            }
+                        }
+                    }
+                }
+            ],
+            "required": [
+                "info",
+                "upstream",
+                "server",
+                "middleware"
+            ],
+            "properties": {
+                "info": {
+                    "$id": "#/properties/x-tyk-api-gateway/properties/info",
+                    "type": "object",
+                    "title": "The info schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": {},
+                    "examples": [
+                        {
+                            "id": "6fb1791a8d30482b7238c7ee881d6b13",
+                            "dbId": "62060e6e86341f72ca413229",
+                            "orgId": "change-me-to-org-id",
+                            "name": "test",
+                            "state": {
+                                "active": true
+                            }
+                        }
+                    ],
+                    "required": [
+                        "id",
+                        "dbId",
+                        "orgId",
+                        "name",
+                        "state"
+                    ],
+                    "properties": {
+                        "id": {
+                            "$id": "#/properties/x-tyk-api-gateway/properties/info/properties/id",
+                            "type": "string",
+                            "title": "The id schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": "",
+                            "examples": [
+                                "6fb1791a8d30482b7238c7ee881d6b13"
+                            ]
+                        },
+                        "dbId": {
+                            "$id": "#/properties/x-tyk-api-gateway/properties/info/properties/dbId",
+                            "type": "string",
+                            "title": "The dbId schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": "",
+                            "examples": [
+                                "62060e6e86341f72ca413229"
+                            ]
+                        },
+                        "orgId": {
+                            "$id": "#/properties/x-tyk-api-gateway/properties/info/properties/orgId",
+                            "type": "string",
+                            "title": "The orgId schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": "",
+                            "examples": [
+                                "change-me-to-org-id"
+                            ]
+                        },
+                        "name": {
+                            "$id": "#/properties/x-tyk-api-gateway/properties/info/properties/name",
+                            "type": "string",
+                            "title": "The name schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": "",
+                            "examples": [
+                                "test"
+                            ]
+                        },
+                        "state": {
+                            "$id": "#/properties/x-tyk-api-gateway/properties/info/properties/state",
+                            "type": "object",
+                            "title": "The state schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": {},
+                            "examples": [
+                                {
+                                    "active": true
+                                }
+                            ],
+                            "required": [
+                                "active"
+                            ],
+                            "properties": {
+                                "active": {
+                                    "$id": "#/properties/x-tyk-api-gateway/properties/info/properties/state/properties/active",
+                                    "type": "boolean",
+                                    "title": "The active schema",
+                                    "description": "An explanation about the purpose of this instance.",
+                                    "default": false,
+                                    "examples": [
+                                        true
+                                    ]
+                                }
+                            },
+                            "additionalProperties": true
+                        }
+                    },
+                    "additionalProperties": true
+                },
+                "upstream": {
+                    "$id": "#/properties/x-tyk-api-gateway/properties/upstream",
+                    "type": "object",
+                    "title": "The upstream schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": {},
+                    "examples": [
+                        {
+                            "url": "http://httpbin.org/"
+                        }
+                    ],
+                    "required": [
+                        "url"
+                    ],
+                    "properties": {
+                        "url": {
+                            "$id": "#/properties/x-tyk-api-gateway/properties/upstream/properties/url",
+                            "type": "string",
+                            "title": "The url schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": "",
+                            "examples": [
+                                "http://httpbin.org/"
+                            ]
+                        }
+                    },
+                    "additionalProperties": true
+                },
+                "server": {
+                    "$id": "#/properties/x-tyk-api-gateway/properties/server",
+                    "type": "object",
+                    "title": "The server schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": {},
+                    "examples": [
+                        {
+                            "listenPath": {
+                                "value": "/test/",
+                                "strip": true
+                            },
+                            "slug": "test",
+                            "authentication": {
+                                "enabled": true,
+                                "token": {
+                                    "enabled": true,
+                                    "header": {
+                                        "name": ""
+                                    }
+                                }
+                            }
+                        }
+                    ],
+                    "required": [
+                        "listenPath",
+                        "slug",
+                        "authentication"
+                    ],
+                    "properties": {
+                        "listenPath": {
+                            "$id": "#/properties/x-tyk-api-gateway/properties/server/properties/listenPath",
+                            "type": "object",
+                            "title": "The listenPath schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": {},
+                            "examples": [
+                                {
+                                    "value": "/test/",
+                                    "strip": true
+                                }
+                            ],
+                            "required": [
+                                "value",
+                                "strip"
+                            ],
+                            "properties": {
+                                "value": {
+                                    "$id": "#/properties/x-tyk-api-gateway/properties/server/properties/listenPath/properties/value",
+                                    "type": "string",
+                                    "title": "The value schema",
+                                    "description": "An explanation about the purpose of this instance.",
+                                    "default": "",
+                                    "examples": [
+                                        "/test/"
+                                    ]
+                                },
+                                "strip": {
+                                    "$id": "#/properties/x-tyk-api-gateway/properties/server/properties/listenPath/properties/strip",
+                                    "type": "boolean",
+                                    "title": "The strip schema",
+                                    "description": "An explanation about the purpose of this instance.",
+                                    "default": false,
+                                    "examples": [
+                                        true
+                                    ]
+                                }
+                            },
+                            "additionalProperties": true
+                        },
+                        "slug": {
+                            "$id": "#/properties/x-tyk-api-gateway/properties/server/properties/slug",
+                            "type": "string",
+                            "title": "The slug schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": "",
+                            "examples": [
+                                "test"
+                            ]
+                        },
+                        "authentication": {
+                            "$id": "#/properties/x-tyk-api-gateway/properties/server/properties/authentication",
+                            "type": "object",
+                            "title": "The authentication schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": {},
+                            "examples": [
+                                {
+                                    "enabled": true,
+                                    "token": {
+                                        "enabled": true,
+                                        "header": {
+                                            "name": ""
+                                        }
+                                    }
+                                }
+                            ],
+                            "required": [
+                                "enabled",
+                                "token"
+                            ],
+                            "properties": {
+                                "enabled": {
+                                    "$id": "#/properties/x-tyk-api-gateway/properties/server/properties/authentication/properties/enabled",
+                                    "type": "boolean",
+                                    "title": "The enabled schema",
+                                    "description": "An explanation about the purpose of this instance.",
+                                    "default": false,
+                                    "examples": [
+                                        true
+                                    ]
+                                },
+                                "token": {
+                                    "$id": "#/properties/x-tyk-api-gateway/properties/server/properties/authentication/properties/token",
+                                    "type": "object",
+                                    "title": "The token schema",
+                                    "description": "An explanation about the purpose of this instance.",
+                                    "default": {},
+                                    "examples": [
+                                        {
+                                            "enabled": true,
+                                            "header": {
+                                                "name": ""
+                                            }
+                                        }
+                                    ],
+                                    "required": [
+                                        "enabled",
+                                        "header"
+                                    ],
+                                    "properties": {
+                                        "enabled": {
+                                            "$id": "#/properties/x-tyk-api-gateway/properties/server/properties/authentication/properties/token/properties/enabled",
+                                            "type": "boolean",
+                                            "title": "The enabled schema",
+                                            "description": "An explanation about the purpose of this instance.",
+                                            "default": false,
+                                            "examples": [
+                                                true
+                                            ]
+                                        },
+                                        "header": {
+                                            "$id": "#/properties/x-tyk-api-gateway/properties/server/properties/authentication/properties/token/properties/header",
+                                            "type": "object",
+                                            "title": "The header schema",
+                                            "description": "An explanation about the purpose of this instance.",
+                                            "default": {},
+                                            "examples": [
+                                                {
+                                                    "name": ""
+                                                }
+                                            ],
+                                            "required": [
+                                                "name"
+                                            ],
+                                            "properties": {
+                                                "name": {
+                                                    "$id": "#/properties/x-tyk-api-gateway/properties/server/properties/authentication/properties/token/properties/header/properties/name",
+                                                    "type": "string",
+                                                    "title": "The name schema",
+                                                    "description": "An explanation about the purpose of this instance.",
+                                                    "default": "",
+                                                    "examples": [
+                                                        ""
+                                                    ]
+                                                }
+                                            },
+                                            "additionalProperties": true
+                                        }
+                                    },
+                                    "additionalProperties": true
+                                }
+                            },
+                            "additionalProperties": true
+                        }
+                    },
+                    "additionalProperties": true
+                },
+                "middleware": {
+                    "$id": "#/properties/x-tyk-api-gateway/properties/middleware",
+                    "type": "object",
+                    "title": "The middleware schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": {},
+                    "examples": [
+                        {
+                            "global": {
+                                "cors": {
+                                    "enabled": true,
+                                    "maxAge": 24,
+                                    "allowedHeaders": [
+                                        "Accept",
+                                        "Content-Type",
+                                        "Origin",
+                                        "X-Requested-With",
+                                        "Authorization"
+                                    ],
+                                    "allowedOrigins": [
+                                        "*"
+                                    ],
+                                    "allowedMethods": [
+                                        "GET",
+                                        "HEAD",
+                                        "POST"
+                                    ]
+                                },
+                                "cache": {
+                                    "enabled": true,
+                                    "timeout": 60
+                                }
+                            },
+                            "operations": {
+                                "getget": {
+                                    "allow": {
+                                        "enabled": true
+                                    }
+                                },
+                                "getstatusid": {
+                                    "allow": {
+                                        "enabled": true
+                                    }
+                                }
+                            }
+                        }
+                    ],
+                    "required": [
+                        "global",
+                        "operations"
+                    ],
+                    "properties": {
+                        "global": {
+                            "$id": "#/properties/x-tyk-api-gateway/properties/middleware/properties/global",
+                            "type": "object",
+                            "title": "The global schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": {},
+                            "examples": [
+                                {
+                                    "cors": {
+                                        "enabled": true,
+                                        "maxAge": 24,
+                                        "allowedHeaders": [
+                                            "Accept",
+                                            "Content-Type",
+                                            "Origin",
+                                            "X-Requested-With",
+                                            "Authorization"
+                                        ],
+                                        "allowedOrigins": [
+                                            "*"
+                                        ],
+                                        "allowedMethods": [
+                                            "GET",
+                                            "HEAD",
+                                            "POST"
+                                        ]
+                                    },
+                                    "cache": {
+                                        "enabled": true,
+                                        "timeout": 60
+                                    }
+                                }
+                            ],
+                            "required": [
+                                "cors",
+                                "cache"
+                            ],
+                            "properties": {
+                                "cors": {
+                                    "$id": "#/properties/x-tyk-api-gateway/properties/middleware/properties/global/properties/cors",
+                                    "type": "object",
+                                    "title": "The cors schema",
+                                    "description": "An explanation about the purpose of this instance.",
+                                    "default": {},
+                                    "examples": [
+                                        {
+                                            "enabled": true,
+                                            "maxAge": 24,
+                                            "allowedHeaders": [
+                                                "Accept",
+                                                "Content-Type",
+                                                "Origin",
+                                                "X-Requested-With",
+                                                "Authorization"
+                                            ],
+                                            "allowedOrigins": [
+                                                "*"
+                                            ],
+                                            "allowedMethods": [
+                                                "GET",
+                                                "HEAD",
+                                                "POST"
+                                            ]
+                                        }
+                                    ],
+                                    "required": [
+                                        "enabled",
+                                        "maxAge",
+                                        "allowedHeaders",
+                                        "allowedOrigins",
+                                        "allowedMethods"
+                                    ],
+                                    "properties": {
+                                        "enabled": {
+                                            "$id": "#/properties/x-tyk-api-gateway/properties/middleware/properties/global/properties/cors/properties/enabled",
+                                            "type": "boolean",
+                                            "title": "The enabled schema",
+                                            "description": "An explanation about the purpose of this instance.",
+                                            "default": false,
+                                            "examples": [
+                                                true
+                                            ]
+                                        },
+                                        "maxAge": {
+                                            "$id": "#/properties/x-tyk-api-gateway/properties/middleware/properties/global/properties/cors/properties/maxAge",
+                                            "type": "integer",
+                                            "title": "The maxAge schema",
+                                            "description": "An explanation about the purpose of this instance.",
+                                            "default": 0,
+                                            "examples": [
+                                                24
+                                            ]
+                                        },
+                                        "allowedHeaders": {
+                                            "$id": "#/properties/x-tyk-api-gateway/properties/middleware/properties/global/properties/cors/properties/allowedHeaders",
+                                            "type": "array",
+                                            "title": "The allowedHeaders schema",
+                                            "description": "An explanation about the purpose of this instance.",
+                                            "default": [],
+                                            "examples": [
+                                                [
+                                                    "Accept",
+                                                    "Content-Type"
+                                                ]
+                                            ],
+                                            "additionalItems": true,
+                                            "items": {
+                                                "$id": "#/properties/x-tyk-api-gateway/properties/middleware/properties/global/properties/cors/properties/allowedHeaders/items",
+                                                "anyOf": [
+                                                    {
+                                                        "$id": "#/properties/x-tyk-api-gateway/properties/middleware/properties/global/properties/cors/properties/allowedHeaders/items/anyOf/0",
+                                                        "type": "string",
+                                                        "title": "The first anyOf schema",
+                                                        "description": "An explanation about the purpose of this instance.",
+                                                        "default": "",
+                                                        "examples": [
+                                                            "Accept",
+                                                            "Content-Type"
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        },
+                                        "allowedOrigins": {
+                                            "$id": "#/properties/x-tyk-api-gateway/properties/middleware/properties/global/properties/cors/properties/allowedOrigins",
+                                            "type": "array",
+                                            "title": "The allowedOrigins schema",
+                                            "description": "An explanation about the purpose of this instance.",
+                                            "default": [],
+                                            "examples": [
+                                                [
+                                                    "*"
+                                                ]
+                                            ],
+                                            "additionalItems": true,
+                                            "items": {
+                                                "$id": "#/properties/x-tyk-api-gateway/properties/middleware/properties/global/properties/cors/properties/allowedOrigins/items",
+                                                "anyOf": [
+                                                    {
+                                                        "$id": "#/properties/x-tyk-api-gateway/properties/middleware/properties/global/properties/cors/properties/allowedOrigins/items/anyOf/0",
+                                                        "type": "string",
+                                                        "title": "The first anyOf schema",
+                                                        "description": "An explanation about the purpose of this instance.",
+                                                        "default": "",
+                                                        "examples": [
+                                                            "*"
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        },
+                                        "allowedMethods": {
+                                            "$id": "#/properties/x-tyk-api-gateway/properties/middleware/properties/global/properties/cors/properties/allowedMethods",
+                                            "type": "array",
+                                            "title": "The allowedMethods schema",
+                                            "description": "An explanation about the purpose of this instance.",
+                                            "default": [],
+                                            "examples": [
+                                                [
+                                                    "GET",
+                                                    "HEAD"
+                                                ]
+                                            ],
+                                            "additionalItems": true,
+                                            "items": {
+                                                "$id": "#/properties/x-tyk-api-gateway/properties/middleware/properties/global/properties/cors/properties/allowedMethods/items",
+                                                "anyOf": [
+                                                    {
+                                                        "$id": "#/properties/x-tyk-api-gateway/properties/middleware/properties/global/properties/cors/properties/allowedMethods/items/anyOf/0",
+                                                        "type": "string",
+                                                        "title": "The first anyOf schema",
+                                                        "description": "An explanation about the purpose of this instance.",
+                                                        "default": "",
+                                                        "examples": [
+                                                            "GET",
+                                                            "HEAD"
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    },
+                                    "additionalProperties": true
+                                },
+                                "cache": {
+                                    "$id": "#/properties/x-tyk-api-gateway/properties/middleware/properties/global/properties/cache",
+                                    "type": "object",
+                                    "title": "The cache schema",
+                                    "description": "An explanation about the purpose of this instance.",
+                                    "default": {},
+                                    "examples": [
+                                        {
+                                            "enabled": true,
+                                            "timeout": 60
+                                        }
+                                    ],
+                                    "required": [
+                                        "enabled",
+                                        "timeout"
+                                    ],
+                                    "properties": {
+                                        "enabled": {
+                                            "$id": "#/properties/x-tyk-api-gateway/properties/middleware/properties/global/properties/cache/properties/enabled",
+                                            "type": "boolean",
+                                            "title": "The enabled schema",
+                                            "description": "An explanation about the purpose of this instance.",
+                                            "default": false,
+                                            "examples": [
+                                                true
+                                            ]
+                                        },
+                                        "timeout": {
+                                            "$id": "#/properties/x-tyk-api-gateway/properties/middleware/properties/global/properties/cache/properties/timeout",
+                                            "type": "integer",
+                                            "title": "The timeout schema",
+                                            "description": "An explanation about the purpose of this instance.",
+                                            "default": 0,
+                                            "examples": [
+                                                60
+                                            ]
+                                        }
+                                    },
+                                    "additionalProperties": true
+                                }
+                            },
+                            "additionalProperties": true
+                        },
+                        "operations": {
+                            "$id": "#/properties/x-tyk-api-gateway/properties/middleware/properties/operations",
+                            "type": "object",
+                            "title": "The operations schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": {},
+                            "examples": [
+                                {
+                                    "getget": {
+                                        "allow": {
+                                            "enabled": true
+                                        }
+                                    },
+                                    "getstatusid": {
+                                        "allow": {
+                                            "enabled": true
+                                        }
+                                    }
+                                }
+                            ],
+                            "required": [
+                                "getget",
+                                "getstatusid"
+                            ],
+                            "properties": {
+                                "getget": {
+                                    "$id": "#/properties/x-tyk-api-gateway/properties/middleware/properties/operations/properties/getget",
+                                    "type": "object",
+                                    "title": "The getget schema",
+                                    "description": "An explanation about the purpose of this instance.",
+                                    "default": {},
+                                    "examples": [
+                                        {
+                                            "allow": {
+                                                "enabled": true
+                                            }
+                                        }
+                                    ],
+                                    "required": [
+                                        "allow"
+                                    ],
+                                    "properties": {
+                                        "allow": {
+                                            "$id": "#/properties/x-tyk-api-gateway/properties/middleware/properties/operations/properties/getget/properties/allow",
+                                            "type": "object",
+                                            "title": "The allow schema",
+                                            "description": "An explanation about the purpose of this instance.",
+                                            "default": {},
+                                            "examples": [
+                                                {
+                                                    "enabled": true
+                                                }
+                                            ],
+                                            "required": [
+                                                "enabled"
+                                            ],
+                                            "properties": {
+                                                "enabled": {
+                                                    "$id": "#/properties/x-tyk-api-gateway/properties/middleware/properties/operations/properties/getget/properties/allow/properties/enabled",
+                                                    "type": "boolean",
+                                                    "title": "The enabled schema",
+                                                    "description": "An explanation about the purpose of this instance.",
+                                                    "default": false,
+                                                    "examples": [
+                                                        true
+                                                    ]
+                                                }
+                                            },
+                                            "additionalProperties": true
+                                        }
+                                    },
+                                    "additionalProperties": true
+                                },
+                                "getstatusid": {
+                                    "$id": "#/properties/x-tyk-api-gateway/properties/middleware/properties/operations/properties/getstatusid",
+                                    "type": "object",
+                                    "title": "The getstatusid schema",
+                                    "description": "An explanation about the purpose of this instance.",
+                                    "default": {},
+                                    "examples": [
+                                        {
+                                            "allow": {
+                                                "enabled": true
+                                            }
+                                        }
+                                    ],
+                                    "required": [
+                                        "allow"
+                                    ],
+                                    "properties": {
+                                        "allow": {
+                                            "$id": "#/properties/x-tyk-api-gateway/properties/middleware/properties/operations/properties/getstatusid/properties/allow",
+                                            "type": "object",
+                                            "title": "The allow schema",
+                                            "description": "An explanation about the purpose of this instance.",
+                                            "default": {},
+                                            "examples": [
+                                                {
+                                                    "enabled": true
+                                                }
+                                            ],
+                                            "required": [
+                                                "enabled"
+                                            ],
+                                            "properties": {
+                                                "enabled": {
+                                                    "$id": "#/properties/x-tyk-api-gateway/properties/middleware/properties/operations/properties/getstatusid/properties/allow/properties/enabled",
+                                                    "type": "boolean",
+                                                    "title": "The enabled schema",
+                                                    "description": "An explanation about the purpose of this instance.",
+                                                    "default": false,
+                                                    "examples": [
+                                                        true
+                                                    ]
+                                                }
+                                            },
+                                            "additionalProperties": true
+                                        }
+                                    },
+                                    "additionalProperties": true
+                                }
+                            },
+                            "additionalProperties": true
+                        }
+                    },
+                    "additionalProperties": true
+                }
+            },
+            "additionalProperties": true
+        }
+    },
+    "additionalProperties": true
+}
