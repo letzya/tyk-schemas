@@ -104,16 +104,14 @@
                     "type": "object",
                     "title": "The myapi access_rights schema",
                     "description": "Access rights for this api",
-                    "default": {},
-                    "examples": [
-                        {
-                            "api_name": "my api",
-                            "api_id": "myapi",
-                            "versions": [
-                                "Default"
-                            ]
-                        }
-                    ],
+                    "default": {
+                        "api_name": "my api",
+                        "api_id": "$(1)",
+                        "versions": [
+                            "Default"
+                        ]
+                    },
+                    "examples": [],
                     "required": [
                         "api_name",
                         "api_id",
@@ -121,7 +119,7 @@
                     ],
                     "properties": {
                         "api_name": {
-                            "$id": "#/properties/access_rights/properties/myapi/properties/api_name",
+                            "$id": "#/properties/access_rights/properties/$(1)/properties/api_name",
                             "type": "string",
                             "title": "The api_name schema",
                             "description": "An explanation about the purpose of this instance.",
@@ -131,17 +129,17 @@
                             ]
                         },
                         "api_id": {
-                            "$id": "#/properties/access_rights/properties/myapi/properties/api_id",
+                            "$id": "#/properties/access_rights/properties/$(1)/properties/api_id",
                             "type": "string",
                             "title": "The api_id schema",
                             "description": "An explanation about the purpose of this instance.",
-                            "default": "",
+                            "default": "api-id",
                             "examples": [
-                                "myapi"
+                                "myapiid"
                             ]
                         },
                         "versions": {
-                            "$id": "#/properties/access_rights/properties/myapi/properties/versions",
+                            "$id": "#/properties/access_rights/properties/$(1)/properties/versions",
                             "type": "array",
                             "title": "The versions schema",
                             "description": "An explanation about the purpose of this instance.",
@@ -153,10 +151,10 @@
                             ],
                             "additionalItems": true,
                             "items": {
-                                "$id": "#/properties/access_rights/properties/myapi/properties/versions/items",
+                                "$id": "#/properties/access_rights/properties/$(1)/properties/versions/items",
                                 "anyOf": [
                                     {
-                                        "$id": "#/properties/access_rights/properties/myapi/properties/versions/items/anyOf/0",
+                                        "$id": "#/properties/access_rights/properties/$(1)/properties/versions/items/anyOf/0",
                                         "type": "string",
                                         "title": "The first anyOf schema",
                                         "description": "An explanation about the purpose of this instance.",
@@ -169,7 +167,7 @@
                             }
                         },
                         "allowed_urls": {
-                            "$id": "#/properties/access_rights/properties/myapi/properties/allowed_urls",
+                            "$id": "#/properties/access_rights/properties/$(1)/properties/allowed_urls",
                             "type": "array",
                             "title": "The allowed_urls schema",
                             "description": "An explanation about the purpose of this instance.",
@@ -179,11 +177,11 @@
                             ],
                             "additionalItems": true,
                             "items": {
-                                "$id": "#/properties/access_rights/properties/myapi/properties/allowed_urls/items"
+                                "$id": "#/properties/access_rights/properties/$(1)/properties/allowed_urls/items"
                             }
                         },
                         "limit": {
-                            "$id": "#/properties/access_rights/properties/myapi/properties/limit",
+                            "$id": "#/properties/access_rights/properties/$(1)/properties/limit",
                             "type": "null",
                             "title": "The limit schema",
                             "description": "An explanation about the purpose of this instance.",
@@ -193,7 +191,7 @@
                             ]
                         },
                         "allowance_scope": {
-                            "$id": "#/properties/access_rights/properties/myapi/properties/allowance_scope",
+                            "$id": "#/properties/access_rights/properties/$(1)/properties/allowance_scope",
                             "type": "string",
                             "title": "The allowance_scope schema",
                             "description": "An explanation about the purpose of this instance.",
