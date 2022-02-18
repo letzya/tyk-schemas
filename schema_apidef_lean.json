@@ -1,15 +1,18 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema",
     "$id": "http://example.com/example.json",
-    "type": "object",
+    "type": [
+        "object",
+        "null"
+    ],
     "title": "The root schema",
     "description": "The root schema comprises the entire JSON document.",
     "default": {
-        "name": "My Api",
-        "api_id": "myapi",
+        "name": "My New Api",
+        "api_id": "mynewpi",
         "org_id": "default",
         "proxy": {
-            "listen_path": "/myapi/",
+            "listen_path": "/mynewpi/",
             "target_url": "http://httpbin.org",
             "strip_listen_path": true,
             "preserve_host_header": true
@@ -25,7 +28,9 @@
         "active": true,
         "use_keyless": true
     },
-    "examples": [],
+    "examples": [
+        {}
+    ],
     "required": [
         "name",
         "proxy",
@@ -49,11 +54,11 @@
         "api_id": {
             "$id": "#/properties/api_id",
             "type": "string",
-            "title": "The api_id schema",
-            "description": "An explanation about the purpose of this instance.",
+            "title": "The Tyk Id for the API",
+            "description": "Should be unique but could be any string you want.",
             "default": "",
             "examples": [
-                "myapi"
+                "mynewapi"
             ]
         },
         "org_id": {
@@ -267,6 +272,15 @@
             ],
             "title": "The config_data global_rate_limit",
             "description": "An explanation about the purpose of this instance.",
+            "default": null,
+            "examples": [
+                "",
+                {},
+                {
+                    "rate": 100,
+                    "per": 5
+                }
+            ],
             "properties": {
                 "rate": {
                     "$id": "#/properties/global_rate_limit/rate",
