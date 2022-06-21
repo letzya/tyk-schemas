@@ -1,1627 +1,2633 @@
 {
-    "$schema": "http://json-schema.org/draft-07/schema",
-    "$id": "http://example.com/example.json",
-    "type": "object",
-    "title": "JSON Schema for Tyk API OAS definition",
-    "description": "The root schema of Tyk API OAS definition JSON document.",
-    "default": {},
-    "examples": [
-        {
-            "components": {
-                "securitySchemes": {
-                    "header_key": {
-                        "in": "header",
-                        "name": "Authorization",
-                        "type": "apiKey"
-                    }
-                }
+        "id": "https://spec.openapis.org/oas/3.0/schema/2021-09-28",
+        "$schema": "http://json-schema.org/draft-04/schema#",
+        "description": "The description of OpenAPI v3.0.x documents, as defined by https://spec.openapis.org/oas/v3.0.3",
+        "type": "object",
+        "required": [
+            "openapi",
+            "info",
+            "paths"
+        ],
+        "properties": {
+            "openapi": {
+                "type": "string",
+                "pattern": "^3\\.0\\.\\d(-.+)?$"
             },
             "info": {
-                "title": "Tyk API OAS Definition",
-                "version": "v0.0.1-alpha"
+                "$ref": "#/definitions/Info"
             },
-            "openapi": "3.0.2",
+            "externalDocs": {
+                "$ref": "#/definitions/ExternalDocumentation"
+            },
+            "servers": {
+                "type": "array",
+                "items": {
+                    "$ref": "#/definitions/Server"
+                }
+            },
+            "security": {
+                "type": "array",
+                "items": {
+                    "$ref": "#/definitions/SecurityRequirement"
+                }
+            },
+            "tags": {
+                "type": "array",
+                "items": {
+                    "$ref": "#/definitions/Tag"
+                },
+                "uniqueItems": true
+            },
             "paths": {
-                "/get": {
-                    "get": {
-                        "description": "test get path",
-                        "operationId": "getget",
-                        "responses": {
-                            "200": {
-                                "description": ""
-                            }
-                        },
-                        "summary": "test"
-                    }
-                },
-                "/status/{id}": {
-                    "get": {
-                        "description": "test status path",
-                        "operationId": "getstatusid",
-                        "parameters": [
-                            {
-                                "in": "path",
-                                "name": "id",
-                                "required": true,
-                                "schema": {}
-                            }
-                        ],
-                        "responses": {
-                            "200": {
-                                "description": ""
-                            }
-                        },
-                        "summary": "test"
-                    }
-                }
+                "$ref": "#/definitions/Paths"
             },
-            "security": [
-                {
-                    "header_key": []
-                }
-            ],
-            "servers": [
-                {
-                    "url": "http://localhost:8181/test/"
-                }
-            ],
+            "components": {
+                "$ref": "#/definitions/Components"
+            },
             "x-tyk-api-gateway": {
-                "info": {
-                    "id": "6fb1791a8d30482b7238c7ee881d6b13",
-                    "dbId": "62060e6e86341f72ca413229",
-                    "orgId": "change-me-to-org-id",
-                    "name": "test",
-                    "state": {
-                        "active": true
-                    }
-                },
-                "upstream": {
-                    "url": "http://httpbin.org/"
-                },
-                "server": {
-                    "listenPath": {
-                        "value": "/test/",
-                        "strip": true
-                    },
-                    "slug": "test",
-                    "authentication": {
-                        "enabled": true,
-                        "token": {
-                            "enabled": true,
-                            "header": {
-                                "name": ""
-                            }
-                        }
-                    }
-                },
-                "middleware": {
-                    "global": {
-                        "cors": {
-                            "enabled": true,
-                            "maxAge": 24,
-                            "allowedHeaders": [
-                                "Accept",
-                                "Content-Type",
-                                "Origin",
-                                "X-Requested-With",
-                                "Authorization"
-                            ],
-                            "allowedOrigins": [
-                                "*"
-                            ],
-                            "allowedMethods": [
-                                "GET",
-                                "HEAD",
-                                "POST"
-                            ]
-                        },
-                        "cache": {
-                            "enabled": true,
-                            "timeout": 60
-                        }
-                    },
-                    "operations": {
-                        "getget": {
-                            "allow": {
-                                "enabled": true
-                            }
-                        },
-                        "getstatusid": {
-                            "allow": {
-                                "enabled": true
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    ],
-    "required": [
-        "info",
-        "openapi"
-    ],
-    "anyOf": [
-        {
-            "required": [
-                "paths"
-            ]
-        },
-        {
-            "required": [
-                "components"
-            ]
-        },
-        {
-            "required": [
-                "webhooks"
-            ]
-        }
-    ],
-    "properties": {
-        "components": {
-            "$id": "#/properties/components",
-            "type": "object",
-            "title": "The components schema",
-            "description": "An explanation about the purpose of this instance.",
-            "default": {},
-            "examples": [
-                {
-                    "securitySchemes": {
-                        "header_key": {
-                            "in": "header",
-                            "name": "Authorization",
-                            "type": "apiKey"
-                        }
-                    }
-                }
-            ],
-            "required": [
-                "securitySchemes"
-            ],
-            "properties": {
-                "securitySchemes": {
-                    "$id": "#/properties/components/properties/securitySchemes",
-                    "type": "object",
-                    "title": "The securitySchemes schema",
-                    "description": "An explanation about the purpose of this instance.",
-                    "default": {},
-                    "examples": [
-                        {
-                            "header_key": {
-                                "in": "header",
-                                "name": "Authorization",
-                                "type": "apiKey"
-                            }
-                        }
-                    ],
-                    "required": [
-                        "header_key"
-                    ],
-                    "properties": {
-                        "header_key": {
-                            "$id": "#/properties/components/properties/securitySchemes/properties/header_key",
-                            "type": "object",
-                            "title": "The header_key schema",
-                            "description": "An explanation about the purpose of this instance.",
-                            "default": {},
-                            "examples": [
-                                {
-                                    "in": "header",
-                                    "name": "Authorization",
-                                    "type": "apiKey"
-                                }
-                            ],
-                            "required": [
-                                "in",
-                                "name",
-                                "type"
-                            ],
-                            "properties": {
-                                "in": {
-                                    "$id": "#/properties/components/properties/securitySchemes/properties/header_key/properties/in",
-                                    "type": "string",
-                                    "title": "The in schema",
-                                    "description": "An explanation about the purpose of this instance.",
-                                    "default": "",
-                                    "examples": [
-                                        "header"
-                                    ]
-                                },
-                                "name": {
-                                    "$id": "#/properties/components/properties/securitySchemes/properties/header_key/properties/name",
-                                    "type": "string",
-                                    "title": "The name schema",
-                                    "description": "An explanation about the purpose of this instance.",
-                                    "default": "",
-                                    "examples": [
-                                        "Authorization"
-                                    ]
-                                },
-                                "type": {
-                                    "$id": "#/properties/components/properties/securitySchemes/properties/header_key/properties/type",
-                                    "type": "string",
-                                    "title": "The type schema",
-                                    "description": "An explanation about the purpose of this instance.",
-                                    "default": "",
-                                    "examples": [
-                                        "apiKey"
-                                    ]
-                                }
-                            },
-                            "additionalProperties": true
-                        }
-                    },
-                    "additionalProperties": true
-                }
-            },
-            "additionalProperties": true
-        },
-        "info": {
-            "$id": "#/properties/info",
-            "type": "object",
-            "title": "The info schema",
-            "description": "An explanation about the purpose of this instance.",
-            "default": {},
-            "examples": [
-                {
-                    "title": "Tyk API OAS Definition",
-                    "version": "v0.0.1-alpha"
-                }
-            ],
-            "required": [
-                "title",
-                "version"
-            ],
-            "properties": {
-                "title": {
-                    "$id": "#/properties/info/properties/title",
-                    "type": "string",
-                    "title": "The title schema",
-                    "description": "An explanation about the purpose of this instance.",
-                    "default": "",
-                    "examples": [
-                        "Tyk API OAS Definition"
-                    ]
-                },
-                "version": {
-                    "$id": "#/properties/info/properties/version",
-                    "type": "string",
-                    "title": "The version schema",
-                    "description": "An explanation about the purpose of this instance.",
-                    "default": "",
-                    "examples": [
-                        "v0.0.1-alpha"
-                    ]
-                }
-            },
-            "additionalProperties": true
-        },
-        "openapi": {
-            "$id": "#/properties/openapi",
-            "type": "string",
-            "pattern": "^3\\.1\\.\\d+(-.+)?$",
-            "title": "The openapi schema",
-            "examples": [
-                "3.0.2"
-            ]
-        },
-        "paths": {
-            "$id": "#/properties/paths",
-            "type": "object",
-            "title": "The paths schema",
-            "description": "An explanation about the purpose of this instance.",
-            "default": {},
-            "examples": [
-                {
-                    "/get": {
-                        "get": {
-                            "description": "test get path",
-                            "operationId": "getget",
-                            "responses": {
-                                "200": {
-                                    "description": ""
-                                }
-                            },
-                            "summary": "test"
-                        }
-                    },
-                    "/status/{id}": {
-                        "get": {
-                            "description": "test status path",
-                            "operationId": "getstatusid",
-                            "parameters": [
-                                {
-                                    "in": "path",
-                                    "name": "id",
-                                    "required": true,
-                                    "schema": {}
-                                }
-                            ],
-                            "responses": {
-                                "200": {
-                                    "description": ""
-                                }
-                            },
-                            "summary": "test"
-                        }
-                    }
-                }
-            ],
-            "required": [
-                "/get",
-                "/status/{id}"
-            ],
-            "properties": {
-                "/get": {
-                    "$id": "#/properties/paths/properties//get",
-                    "type": "object",
-                    "title": "The /get schema",
-                    "description": "An explanation about the purpose of this instance.",
-                    "default": {},
-                    "examples": [
-                        {
-                            "get": {
-                                "description": "test get path",
-                                "operationId": "getget",
-                                "responses": {
-                                    "200": {
-                                        "description": ""
-                                    }
-                                },
-                                "summary": "test"
-                            }
-                        }
-                    ],
-                    "required": [
-                        "get"
-                    ],
-                    "properties": {
-                        "get": {
-                            "$id": "#/properties/paths/properties//get/properties/get",
-                            "type": "object",
-                            "title": "The get schema",
-                            "description": "An explanation about the purpose of this instance.",
-                            "default": {},
-                            "examples": [
-                                {
-                                    "description": "test get path",
-                                    "operationId": "getget",
-                                    "responses": {
-                                        "200": {
-                                            "description": ""
-                                        }
-                                    },
-                                    "summary": "test"
-                                }
-                            ],
-                            "required": [
-                                "description",
-                                "operationId",
-                                "responses",
-                                "summary"
-                            ],
-                            "properties": {
-                                "description": {
-                                    "$id": "#/properties/paths/properties//get/properties/get/properties/description",
-                                    "type": "string",
-                                    "title": "The description schema",
-                                    "description": "An explanation about the purpose of this instance.",
-                                    "default": "",
-                                    "examples": [
-                                        "test get path"
-                                    ]
-                                },
-                                "operationId": {
-                                    "$id": "#/properties/paths/properties//get/properties/get/properties/operationId",
-                                    "type": "string",
-                                    "title": "The operationId schema",
-                                    "description": "An explanation about the purpose of this instance.",
-                                    "default": "",
-                                    "examples": [
-                                        "getget"
-                                    ]
-                                },
-                                "responses": {
-                                    "$id": "#/properties/paths/properties//get/properties/get/properties/responses",
-                                    "type": "object",
-                                    "title": "The responses schema",
-                                    "description": "An explanation about the purpose of this instance.",
-                                    "default": {},
-                                    "examples": [
-                                        {
-                                            "200": {
-                                                "description": ""
-                                            }
-                                        }
-                                    ],
-                                    "required": [
-                                        "200"
-                                    ],
-                                    "properties": {
-                                        "200": {
-                                            "$id": "#/properties/paths/properties//get/properties/get/properties/responses/properties/200",
-                                            "type": "object",
-                                            "title": "The 200 schema",
-                                            "description": "An explanation about the purpose of this instance.",
-                                            "default": {},
-                                            "examples": [
-                                                {
-                                                    "description": ""
-                                                }
-                                            ],
-                                            "required": [
-                                                "description"
-                                            ],
-                                            "properties": {
-                                                "description": {
-                                                    "$id": "#/properties/paths/properties//get/properties/get/properties/responses/properties/200/properties/description",
-                                                    "type": "string",
-                                                    "title": "The description schema",
-                                                    "description": "An explanation about the purpose of this instance.",
-                                                    "default": "",
-                                                    "examples": [
-                                                        ""
-                                                    ]
-                                                }
-                                            },
-                                            "additionalProperties": true
-                                        }
-                                    },
-                                    "additionalProperties": true
-                                },
-                                "summary": {
-                                    "$id": "#/properties/paths/properties//get/properties/get/properties/summary",
-                                    "type": "string",
-                                    "title": "The summary schema",
-                                    "description": "An explanation about the purpose of this instance.",
-                                    "default": "",
-                                    "examples": [
-                                        "test"
-                                    ]
-                                }
-                            },
-                            "additionalProperties": true
-                        }
-                    },
-                    "additionalProperties": true
-                },
-                "/status/{id}": {
-                    "$id": "#/properties/paths/properties//status/%7Bid%7D",
-                    "type": "object",
-                    "title": "The /status/{id} schema",
-                    "description": "An explanation about the purpose of this instance.",
-                    "default": {},
-                    "examples": [
-                        {
-                            "get": {
-                                "description": "test status path",
-                                "operationId": "getstatusid",
-                                "parameters": [
-                                    {
-                                        "in": "path",
-                                        "name": "id",
-                                        "required": true,
-                                        "schema": {}
-                                    }
-                                ],
-                                "responses": {
-                                    "200": {
-                                        "description": ""
-                                    }
-                                },
-                                "summary": "test"
-                            }
-                        }
-                    ],
-                    "required": [
-                        "get"
-                    ],
-                    "properties": {
-                        "get": {
-                            "$id": "#/properties/paths/properties//status/%7Bid%7D/properties/get",
-                            "type": "object",
-                            "title": "The get schema",
-                            "description": "An explanation about the purpose of this instance.",
-                            "default": {},
-                            "examples": [
-                                {
-                                    "description": "test status path",
-                                    "operationId": "getstatusid",
-                                    "parameters": [
-                                        {
-                                            "in": "path",
-                                            "name": "id",
-                                            "required": true,
-                                            "schema": {}
-                                        }
-                                    ],
-                                    "responses": {
-                                        "200": {
-                                            "description": ""
-                                        }
-                                    },
-                                    "summary": "test"
-                                }
-                            ],
-                            "required": [
-                                "description",
-                                "operationId",
-                                "parameters",
-                                "responses",
-                                "summary"
-                            ],
-                            "properties": {
-                                "description": {
-                                    "$id": "#/properties/paths/properties//status/%7Bid%7D/properties/get/properties/description",
-                                    "type": "string",
-                                    "title": "The description schema",
-                                    "description": "An explanation about the purpose of this instance.",
-                                    "default": "",
-                                    "examples": [
-                                        "test status path"
-                                    ]
-                                },
-                                "operationId": {
-                                    "$id": "#/properties/paths/properties//status/%7Bid%7D/properties/get/properties/operationId",
-                                    "type": "string",
-                                    "title": "The operationId schema",
-                                    "description": "An explanation about the purpose of this instance.",
-                                    "default": "",
-                                    "examples": [
-                                        "getstatusid"
-                                    ]
-                                },
-                                "parameters": {
-                                    "$id": "#/properties/paths/properties//status/%7Bid%7D/properties/get/properties/parameters",
-                                    "type": "array",
-                                    "title": "The parameters schema",
-                                    "description": "An explanation about the purpose of this instance.",
-                                    "default": [],
-                                    "examples": [
-                                        [
-                                            {
-                                                "in": "path",
-                                                "name": "id",
-                                                "required": true,
-                                                "schema": {}
-                                            }
-                                        ]
-                                    ],
-                                    "additionalItems": true,
-                                    "items": {
-                                        "$id": "#/properties/paths/properties//status/%7Bid%7D/properties/get/properties/parameters/items",
-                                        "anyOf": [
-                                            {
-                                                "$id": "#/properties/paths/properties//status/%7Bid%7D/properties/get/properties/parameters/items/anyOf/0",
-                                                "type": "object",
-                                                "title": "The first anyOf schema",
-                                                "description": "An explanation about the purpose of this instance.",
-                                                "default": {},
-                                                "examples": [
-                                                    {
-                                                        "in": "path",
-                                                        "name": "id",
-                                                        "required": true,
-                                                        "schema": {}
-                                                    }
-                                                ],
-                                                "required": [
-                                                    "in",
-                                                    "name",
-                                                    "required",
-                                                    "schema"
-                                                ],
-                                                "properties": {
-                                                    "in": {
-                                                        "$id": "#/properties/paths/properties//status/%7Bid%7D/properties/get/properties/parameters/items/anyOf/0/properties/in",
-                                                        "type": "string",
-                                                        "title": "The in schema",
-                                                        "description": "An explanation about the purpose of this instance.",
-                                                        "default": "",
-                                                        "examples": [
-                                                            "path"
-                                                        ]
-                                                    },
-                                                    "name": {
-                                                        "$id": "#/properties/paths/properties//status/%7Bid%7D/properties/get/properties/parameters/items/anyOf/0/properties/name",
-                                                        "type": "string",
-                                                        "title": "The name schema",
-                                                        "description": "An explanation about the purpose of this instance.",
-                                                        "default": "",
-                                                        "examples": [
-                                                            "id"
-                                                        ]
-                                                    },
-                                                    "required": {
-                                                        "$id": "#/properties/paths/properties//status/%7Bid%7D/properties/get/properties/parameters/items/anyOf/0/properties/required",
-                                                        "type": "boolean",
-                                                        "title": "The required schema",
-                                                        "description": "An explanation about the purpose of this instance.",
-                                                        "default": false,
-                                                        "examples": [
-                                                            true
-                                                        ]
-                                                    },
-                                                    "schema": {
-                                                        "$id": "#/properties/paths/properties//status/%7Bid%7D/properties/get/properties/parameters/items/anyOf/0/properties/schema",
-                                                        "type": "object",
-                                                        "title": "The schema schema",
-                                                        "description": "An explanation about the purpose of this instance.",
-                                                        "default": {},
-                                                        "examples": [
-                                                            {}
-                                                        ],
-                                                        "required": [],
-                                                        "additionalProperties": true
-                                                    }
-                                                },
-                                                "additionalProperties": true
-                                            }
-                                        ]
-                                    }
-                                },
-                                "responses": {
-                                    "$id": "#/properties/paths/properties//status/%7Bid%7D/properties/get/properties/responses",
-                                    "type": "object",
-                                    "title": "The responses schema",
-                                    "description": "An explanation about the purpose of this instance.",
-                                    "default": {},
-                                    "examples": [
-                                        {
-                                            "200": {
-                                                "description": ""
-                                            }
-                                        }
-                                    ],
-                                    "required": [
-                                        "200"
-                                    ],
-                                    "properties": {
-                                        "200": {
-                                            "$id": "#/properties/paths/properties//status/%7Bid%7D/properties/get/properties/responses/properties/200",
-                                            "type": "object",
-                                            "title": "The 200 schema",
-                                            "description": "An explanation about the purpose of this instance.",
-                                            "default": {},
-                                            "examples": [
-                                                {
-                                                    "description": ""
-                                                }
-                                            ],
-                                            "required": [
-                                                "description"
-                                            ],
-                                            "properties": {
-                                                "description": {
-                                                    "$id": "#/properties/paths/properties//status/%7Bid%7D/properties/get/properties/responses/properties/200/properties/description",
-                                                    "type": "string",
-                                                    "title": "The description schema",
-                                                    "description": "An explanation about the purpose of this instance.",
-                                                    "default": "",
-                                                    "examples": [
-                                                        ""
-                                                    ]
-                                                }
-                                            },
-                                            "additionalProperties": true
-                                        }
-                                    },
-                                    "additionalProperties": true
-                                },
-                                "summary": {
-                                    "$id": "#/properties/paths/properties//status/%7Bid%7D/properties/get/properties/summary",
-                                    "type": "string",
-                                    "title": "The summary schema",
-                                    "description": "An explanation about the purpose of this instance.",
-                                    "default": "",
-                                    "examples": [
-                                        "test"
-                                    ]
-                                }
-                            },
-                            "additionalProperties": true
-                        }
-                    },
-                    "additionalProperties": true
-                }
-            },
-            "additionalProperties": true
-        },
-        "security": {
-            "$id": "#/properties/security",
-            "type": "array",
-            "title": "The security schema",
-            "description": "An explanation about the purpose of this instance.",
-            "default": [],
-            "examples": [
-                [
-                    {
-                        "header_key": []
-                    }
-                ]
-            ],
-            "additionalItems": true,
-            "items": {
-                "$id": "#/properties/security/items",
-                "anyOf": [
-                    {
-                        "$id": "#/properties/security/items/anyOf/0",
-                        "type": "object",
-                        "title": "The first anyOf schema",
-                        "description": "An explanation about the purpose of this instance.",
-                        "default": {},
-                        "examples": [
-                            {
-                                "header_key": []
-                            }
-                        ],
-                        "required": [
-                            "header_key"
-                        ],
-                        "properties": {
-                            "header_key": {
-                                "$id": "#/properties/security/items/anyOf/0/properties/header_key",
-                                "type": "array",
-                                "title": "The header_key schema",
-                                "description": "An explanation about the purpose of this instance.",
-                                "default": [],
-                                "examples": [
-                                    []
-                                ],
-                                "additionalItems": true,
-                                "items": {
-                                    "$id": "#/properties/security/items/anyOf/0/properties/header_key/items"
-                                }
-                            }
-                        },
-                        "additionalProperties": true
-                    }
-                ]
-            }
-        },
-        "servers": {
-            "$id": "#/properties/servers",
-            "type": "array",
-            "title": "The servers schema",
-            "description": "An explanation about the purpose of this instance.",
-            "default": [],
-            "examples": [
-                [
-                    {
-                        "url": "http://localhost:8181/test/"
-                    }
-                ]
-            ],
-            "additionalItems": true,
-            "items": {
-                "$id": "#/properties/servers/items",
-                "anyOf": [
-                    {
-                        "$id": "#/properties/servers/items/anyOf/0",
-                        "type": "object",
-                        "title": "The first anyOf schema",
-                        "description": "An explanation about the purpose of this instance.",
-                        "default": {},
-                        "examples": [
-                            {
-                                "url": "http://localhost:8181/test/"
-                            }
-                        ],
-                        "required": [
-                            "url"
-                        ],
-                        "properties": {
-                            "url": {
-                                "$id": "#/properties/servers/items/anyOf/0/properties/url",
-                                "type": "string",
-                                "title": "The url schema",
-                                "description": "An explanation about the purpose of this instance.",
-                                "default": "",
-                                "examples": [
-                                    "http://localhost:8181/test/"
-                                ]
-                            }
-                        },
-                        "additionalProperties": true
-                    }
-                ]
-            }
-        },
-        "x-tyk-api-gateway": {
-            "$id": "#/properties/x-tyk-api-gateway",
-            "type": "object",
-            "title": "The x-tyk-api-gateway schema",
-            "description": "An explanation about the purpose of this instance.",
-            "default": {},
-            "examples": [
-                {
+                "type": "object",
+                "properties": {
                     "info": {
-                        "id": "6fb1791a8d30482b7238c7ee881d6b13",
-                        "dbId": "62060e6e86341f72ca413229",
-                        "orgId": "change-me-to-org-id",
-                        "name": "test",
-                        "state": {
-                            "active": true
-                        }
+                        "$ref": "#/definitions/X-Tyk-Info"
                     },
                     "upstream": {
-                        "url": "http://httpbin.org/"
+                        "$ref": "#/definitions/X-Tyk-Upstream"
                     },
                     "server": {
-                        "listenPath": {
-                            "value": "/test/",
-                            "strip": true
-                        },
-                        "slug": "test",
-                        "authentication": {
-                            "enabled": true,
-                            "token": {
-                                "enabled": true,
-                                "header": {
-                                    "name": ""
-                                }
+                        "$ref": "#/definitions/X-Tyk-Server"
+                    },
+                    "middleware": {
+                        "$ref": "#/definitions/X-Tyk-Middleware"
+                    }
+                },
+                "required": [
+                    "info",
+                    "upstream",
+                    "server"
+                ]
+            }
+        },
+        "patternProperties": {
+            "^x-": {}
+        },
+        "additionalProperties": false,
+        "definitions": {
+            "Reference": {
+                "type": "object",
+                "required": [
+                    "$ref"
+                ],
+                "patternProperties": {
+                    "^\\$ref$": {
+                        "type": "string",
+                        "format": "uri-reference"
+                    }
+                }
+            },
+            "Info": {
+                "type": "object",
+                "required": [
+                    "title",
+                    "version"
+                ],
+                "properties": {
+                    "title": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "termsOfService": {
+                        "type": "string",
+                        "format": "uri-reference"
+                    },
+                    "contact": {
+                        "$ref": "#/definitions/Contact"
+                    },
+                    "license": {
+                        "$ref": "#/definitions/License"
+                    },
+                    "version": {
+                        "type": "string"
+                    }
+                },
+                "patternProperties": {
+                    "^x-": {}
+                },
+                "additionalProperties": false
+            },
+            "Contact": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "url": {
+                        "type": "string",
+                        "format": "uri-reference"
+                    },
+                    "email": {
+                        "type": "string",
+                        "format": "email"
+                    }
+                },
+                "patternProperties": {
+                    "^x-": {}
+                },
+                "additionalProperties": false
+            },
+            "License": {
+                "type": "object",
+                "required": [
+                    "name"
+                ],
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "url": {
+                        "type": "string",
+                        "format": "uri-reference"
+                    }
+                },
+                "patternProperties": {
+                    "^x-": {}
+                },
+                "additionalProperties": false
+            },
+            "Server": {
+                "type": "object",
+                "required": [
+                    "url"
+                ],
+                "properties": {
+                    "url": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "variables": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "$ref": "#/definitions/ServerVariable"
+                        }
+                    }
+                },
+                "patternProperties": {
+                    "^x-": {}
+                },
+                "additionalProperties": false
+            },
+            "ServerVariable": {
+                "type": "object",
+                "required": [
+                    "default"
+                ],
+                "properties": {
+                    "enum": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    }
+                },
+                "patternProperties": {
+                    "^x-": {}
+                },
+                "additionalProperties": false
+            },
+            "Components": {
+                "type": "object",
+                "properties": {
+                    "schemas": {
+                        "type": "object",
+                        "patternProperties": {
+                            "^[a-zA-Z0-9\\.\\-_]+$": {
+                                "oneOf": [
+                                    {
+                                        "$ref": "#/definitions/Schema"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/Reference"
+                                    }
+                                ]
                             }
                         }
                     },
-                    "middleware": {
-                        "global": {
-                            "cors": {
-                                "enabled": true,
-                                "maxAge": 24,
-                                "allowedHeaders": [
-                                    "Accept",
-                                    "Content-Type",
-                                    "Origin",
-                                    "X-Requested-With",
-                                    "Authorization"
-                                ],
-                                "allowedOrigins": [
-                                    "*"
-                                ],
-                                "allowedMethods": [
-                                    "GET",
-                                    "HEAD",
-                                    "POST"
+                    "responses": {
+                        "type": "object",
+                        "patternProperties": {
+                            "^[a-zA-Z0-9\\.\\-_]+$": {
+                                "oneOf": [
+                                    {
+                                        "$ref": "#/definitions/Reference"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/Response"
+                                    }
                                 ]
-                            },
-                            "cache": {
-                                "enabled": true,
-                                "timeout": 60
                             }
+                        }
+                    },
+                    "parameters": {
+                        "type": "object",
+                        "patternProperties": {
+                            "^[a-zA-Z0-9\\.\\-_]+$": {
+                                "oneOf": [
+                                    {
+                                        "$ref": "#/definitions/Reference"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/Parameter"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "examples": {
+                        "type": "object",
+                        "patternProperties": {
+                            "^[a-zA-Z0-9\\.\\-_]+$": {
+                                "oneOf": [
+                                    {
+                                        "$ref": "#/definitions/Reference"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/Example"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "requestBodies": {
+                        "type": "object",
+                        "patternProperties": {
+                            "^[a-zA-Z0-9\\.\\-_]+$": {
+                                "oneOf": [
+                                    {
+                                        "$ref": "#/definitions/Reference"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/RequestBody"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "headers": {
+                        "type": "object",
+                        "patternProperties": {
+                            "^[a-zA-Z0-9\\.\\-_]+$": {
+                                "oneOf": [
+                                    {
+                                        "$ref": "#/definitions/Reference"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/Header"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "securitySchemes": {
+                        "type": "object",
+                        "patternProperties": {
+                            "^[a-zA-Z0-9\\.\\-_]+$": {
+                                "oneOf": [
+                                    {
+                                        "$ref": "#/definitions/Reference"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/SecurityScheme"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "links": {
+                        "type": "object",
+                        "patternProperties": {
+                            "^[a-zA-Z0-9\\.\\-_]+$": {
+                                "oneOf": [
+                                    {
+                                        "$ref": "#/definitions/Reference"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/Link"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "callbacks": {
+                        "type": "object",
+                        "patternProperties": {
+                            "^[a-zA-Z0-9\\.\\-_]+$": {
+                                "oneOf": [
+                                    {
+                                        "$ref": "#/definitions/Reference"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/Callback"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "patternProperties": {
+                    "^x-": {}
+                },
+                "additionalProperties": false
+            },
+            "Schema": {
+                "type": "object",
+                "properties": {
+                    "title": {
+                        "type": "string"
+                    },
+                    "multipleOf": {
+                        "type": "number",
+                        "minimum": 0,
+                        "exclusiveMinimum": true
+                    },
+                    "maximum": {
+                        "type": "number"
+                    },
+                    "exclusiveMaximum": {
+                        "type": "boolean",
+                        "default": false
+                    },
+                    "minimum": {
+                        "type": "number"
+                    },
+                    "exclusiveMinimum": {
+                        "type": "boolean",
+                        "default": false
+                    },
+                    "maxLength": {
+                        "type": "integer",
+                        "minimum": 0
+                    },
+                    "minLength": {
+                        "type": "integer",
+                        "minimum": 0,
+                        "default": 0
+                    },
+                    "pattern": {
+                        "type": "string",
+                        "format": "regex"
+                    },
+                    "maxItems": {
+                        "type": "integer",
+                        "minimum": 0
+                    },
+                    "minItems": {
+                        "type": "integer",
+                        "minimum": 0,
+                        "default": 0
+                    },
+                    "uniqueItems": {
+                        "type": "boolean",
+                        "default": false
+                    },
+                    "maxProperties": {
+                        "type": "integer",
+                        "minimum": 0
+                    },
+                    "minProperties": {
+                        "type": "integer",
+                        "minimum": 0,
+                        "default": 0
+                    },
+                    "required": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
                         },
-                        "operations": {
-                            "getget": {
-                                "allow": {
-                                    "enabled": true
+                        "minItems": 1,
+                        "uniqueItems": true
+                    },
+                    "enum": {
+                        "type": "array",
+                        "items": {},
+                        "minItems": 1,
+                        "uniqueItems": false
+                    },
+                    "type": {
+                        "type": "string",
+                        "enum": [
+                            "array",
+                            "boolean",
+                            "integer",
+                            "number",
+                            "object",
+                            "string"
+                        ]
+                    },
+                    "not": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/definitions/Schema"
+                            },
+                            {
+                                "$ref": "#/definitions/Reference"
+                            }
+                        ]
+                    },
+                    "allOf": {
+                        "type": "array",
+                        "items": {
+                            "oneOf": [
+                                {
+                                    "$ref": "#/definitions/Schema"
+                                },
+                                {
+                                    "$ref": "#/definitions/Reference"
+                                }
+                            ]
+                        }
+                    },
+                    "oneOf": {
+                        "type": "array",
+                        "items": {
+                            "oneOf": [
+                                {
+                                    "$ref": "#/definitions/Schema"
+                                },
+                                {
+                                    "$ref": "#/definitions/Reference"
+                                }
+                            ]
+                        }
+                    },
+                    "anyOf": {
+                        "type": "array",
+                        "items": {
+                            "oneOf": [
+                                {
+                                    "$ref": "#/definitions/Schema"
+                                },
+                                {
+                                    "$ref": "#/definitions/Reference"
+                                }
+                            ]
+                        }
+                    },
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/definitions/Schema"
+                            },
+                            {
+                                "$ref": "#/definitions/Reference"
+                            }
+                        ]
+                    },
+                    "properties": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "oneOf": [
+                                {
+                                    "$ref": "#/definitions/Schema"
+                                },
+                                {
+                                    "$ref": "#/definitions/Reference"
+                                }
+                            ]
+                        }
+                    },
+                    "additionalProperties": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/definitions/Schema"
+                            },
+                            {
+                                "$ref": "#/definitions/Reference"
+                            },
+                            {
+                                "type": "boolean"
+                            }
+                        ],
+                        "default": true
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "format": {
+                        "type": "string"
+                    },
+                    "default": {},
+                    "nullable": {
+                        "type": "boolean",
+                        "default": false
+                    },
+                    "discriminator": {
+                        "$ref": "#/definitions/Discriminator"
+                    },
+                    "readOnly": {
+                        "type": "boolean",
+                        "default": false
+                    },
+                    "writeOnly": {
+                        "type": "boolean",
+                        "default": false
+                    },
+                    "example": {},
+                    "externalDocs": {
+                        "$ref": "#/definitions/ExternalDocumentation"
+                    },
+                    "deprecated": {
+                        "type": "boolean",
+                        "default": false
+                    },
+                    "xml": {
+                        "$ref": "#/definitions/XML"
+                    }
+                },
+                "patternProperties": {
+                    "^x-": {}
+                },
+                "additionalProperties": false
+            },
+            "Discriminator": {
+                "type": "object",
+                "required": [
+                    "propertyName"
+                ],
+                "properties": {
+                    "propertyName": {
+                        "type": "string"
+                    },
+                    "mapping": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "XML": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "namespace": {
+                        "type": "string",
+                        "format": "uri"
+                    },
+                    "prefix": {
+                        "type": "string"
+                    },
+                    "attribute": {
+                        "type": "boolean",
+                        "default": false
+                    },
+                    "wrapped": {
+                        "type": "boolean",
+                        "default": false
+                    }
+                },
+                "patternProperties": {
+                    "^x-": {}
+                },
+                "additionalProperties": false
+            },
+            "Response": {
+                "type": "object",
+                "required": [
+                    "description"
+                ],
+                "properties": {
+                    "description": {
+                        "type": "string"
+                    },
+                    "headers": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "oneOf": [
+                                {
+                                    "$ref": "#/definitions/Header"
+                                },
+                                {
+                                    "$ref": "#/definitions/Reference"
+                                }
+                            ]
+                        }
+                    },
+                    "content": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "$ref": "#/definitions/MediaType"
+                        }
+                    },
+                    "links": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "oneOf": [
+                                {
+                                    "$ref": "#/definitions/Link"
+                                },
+                                {
+                                    "$ref": "#/definitions/Reference"
+                                }
+                            ]
+                        }
+                    }
+                },
+                "patternProperties": {
+                    "^x-": {}
+                },
+                "additionalProperties": false
+            },
+            "MediaType": {
+                "type": "object",
+                "properties": {
+                    "schema": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/definitions/Schema"
+                            },
+                            {
+                                "$ref": "#/definitions/Reference"
+                            }
+                        ]
+                    },
+                    "example": {},
+                    "examples": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "oneOf": [
+                                {
+                                    "$ref": "#/definitions/Example"
+                                },
+                                {
+                                    "$ref": "#/definitions/Reference"
+                                }
+                            ]
+                        }
+                    },
+                    "encoding": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "$ref": "#/definitions/Encoding"
+                        }
+                    }
+                },
+                "patternProperties": {
+                    "^x-": {}
+                },
+                "additionalProperties": false,
+                "allOf": [
+                    {
+                        "$ref": "#/definitions/ExampleXORExamples"
+                    }
+                ]
+            },
+            "Example": {
+                "type": "object",
+                "properties": {
+                    "summary": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "value": {},
+                    "externalValue": {
+                        "type": "string",
+                        "format": "uri-reference"
+                    }
+                },
+                "patternProperties": {
+                    "^x-": {}
+                },
+                "additionalProperties": false
+            },
+            "Header": {
+                "type": "object",
+                "properties": {
+                    "description": {
+                        "type": "string"
+                    },
+                    "required": {
+                        "type": "boolean",
+                        "default": false
+                    },
+                    "deprecated": {
+                        "type": "boolean",
+                        "default": false
+                    },
+                    "allowEmptyValue": {
+                        "type": "boolean",
+                        "default": false
+                    },
+                    "style": {
+                        "type": "string",
+                        "enum": [
+                            "simple"
+                        ],
+                        "default": "simple"
+                    },
+                    "explode": {
+                        "type": "boolean"
+                    },
+                    "allowReserved": {
+                        "type": "boolean",
+                        "default": false
+                    },
+                    "schema": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/definitions/Schema"
+                            },
+                            {
+                                "$ref": "#/definitions/Reference"
+                            }
+                        ]
+                    },
+                    "content": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "$ref": "#/definitions/MediaType"
+                        },
+                        "minProperties": 1,
+                        "maxProperties": 1
+                    },
+                    "example": {},
+                    "examples": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "oneOf": [
+                                {
+                                    "$ref": "#/definitions/Example"
+                                },
+                                {
+                                    "$ref": "#/definitions/Reference"
+                                }
+                            ]
+                        }
+                    }
+                },
+                "patternProperties": {
+                    "^x-": {}
+                },
+                "additionalProperties": false,
+                "allOf": [
+                    {
+                        "$ref": "#/definitions/ExampleXORExamples"
+                    },
+                    {
+                        "$ref": "#/definitions/SchemaXORContent"
+                    }
+                ]
+            },
+            "Paths": {
+                "type": "object",
+                "patternProperties": {
+                    "^\/": {
+                        "$ref": "#/definitions/PathItem"
+                    },
+                    "^x-": {}
+                },
+                "additionalProperties": false
+            },
+            "PathItem": {
+                "type": "object",
+                "properties": {
+                    "$ref": {
+                        "type": "string"
+                    },
+                    "summary": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "servers": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/definitions/Server"
+                        }
+                    },
+                    "parameters": {
+                        "type": "array",
+                        "items": {
+                            "oneOf": [
+                                {
+                                    "$ref": "#/definitions/Parameter"
+                                },
+                                {
+                                    "$ref": "#/definitions/Reference"
+                                }
+                            ]
+                        },
+                        "uniqueItems": true
+                    }
+                },
+                "patternProperties": {
+                    "^(get|put|post|delete|options|head|patch|trace)$": {
+                        "$ref": "#/definitions/Operation"
+                    },
+                    "^x-": {}
+                },
+                "additionalProperties": false
+            },
+            "Operation": {
+                "type": "object",
+                "required": [
+                    "responses"
+                ],
+                "properties": {
+                    "tags": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "summary": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "externalDocs": {
+                        "$ref": "#/definitions/ExternalDocumentation"
+                    },
+                    "operationId": {
+                        "type": "string"
+                    },
+                    "parameters": {
+                        "type": "array",
+                        "items": {
+                            "oneOf": [
+                                {
+                                    "$ref": "#/definitions/Parameter"
+                                },
+                                {
+                                    "$ref": "#/definitions/Reference"
+                                }
+                            ]
+                        },
+                        "uniqueItems": true
+                    },
+                    "requestBody": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/definitions/RequestBody"
+                            },
+                            {
+                                "$ref": "#/definitions/Reference"
+                            }
+                        ]
+                    },
+                    "responses": {
+                        "$ref": "#/definitions/Responses"
+                    },
+                    "callbacks": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "oneOf": [
+                                {
+                                    "$ref": "#/definitions/Callback"
+                                },
+                                {
+                                    "$ref": "#/definitions/Reference"
+                                }
+                            ]
+                        }
+                    },
+                    "deprecated": {
+                        "type": "boolean",
+                        "default": false
+                    },
+                    "security": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/definitions/SecurityRequirement"
+                        }
+                    },
+                    "servers": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/definitions/Server"
+                        }
+                    }
+                },
+                "patternProperties": {
+                    "^x-": {}
+                },
+                "additionalProperties": false
+            },
+            "Responses": {
+                "type": "object",
+                "properties": {
+                    "default": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/definitions/Response"
+                            },
+                            {
+                                "$ref": "#/definitions/Reference"
+                            }
+                        ]
+                    }
+                },
+                "patternProperties": {
+                    "^[1-5](?:\\d{2}|XX)$": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/definitions/Response"
+                            },
+                            {
+                                "$ref": "#/definitions/Reference"
+                            }
+                        ]
+                    },
+                    "^x-": {}
+                },
+                "minProperties": 1,
+                "additionalProperties": false
+            },
+            "SecurityRequirement": {
+                "type": "object",
+                "additionalProperties": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            },
+            "Tag": {
+                "type": "object",
+                "required": [
+                    "name"
+                ],
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "externalDocs": {
+                        "$ref": "#/definitions/ExternalDocumentation"
+                    }
+                },
+                "patternProperties": {
+                    "^x-": {}
+                },
+                "additionalProperties": false
+            },
+            "ExternalDocumentation": {
+                "type": "object",
+                "required": [
+                    "url"
+                ],
+                "properties": {
+                    "description": {
+                        "type": "string"
+                    },
+                    "url": {
+                        "type": "string",
+                        "format": "uri-reference"
+                    }
+                },
+                "patternProperties": {
+                    "^x-": {}
+                },
+                "additionalProperties": false
+            },
+            "ExampleXORExamples": {
+                "description": "Example and examples are mutually exclusive",
+                "not": {
+                    "required": [
+                        "example",
+                        "examples"
+                    ]
+                }
+            },
+            "SchemaXORContent": {
+                "description": "Schema and content are mutually exclusive, at least one is required",
+                "not": {
+                    "required": [
+                        "schema",
+                        "content"
+                    ]
+                },
+                "oneOf": [
+                    {
+                        "required": [
+                            "schema"
+                        ]
+                    },
+                    {
+                        "required": [
+                            "content"
+                        ],
+                        "description": "Some properties are not allowed if content is present",
+                        "allOf": [
+                            {
+                                "not": {
+                                    "required": [
+                                        "style"
+                                    ]
                                 }
                             },
-                            "getstatusid": {
-                                "allow": {
-                                    "enabled": true
+                            {
+                                "not": {
+                                    "required": [
+                                        "explode"
+                                    ]
+                                }
+                            },
+                            {
+                                "not": {
+                                    "required": [
+                                        "allowReserved"
+                                    ]
+                                }
+                            },
+                            {
+                                "not": {
+                                    "required": [
+                                        "example"
+                                    ]
+                                }
+                            },
+                            {
+                                "not": {
+                                    "required": [
+                                        "examples"
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                ]
+            },
+            "Parameter": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "in": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "required": {
+                        "type": "boolean",
+                        "default": false
+                    },
+                    "deprecated": {
+                        "type": "boolean",
+                        "default": false
+                    },
+                    "allowEmptyValue": {
+                        "type": "boolean",
+                        "default": false
+                    },
+                    "style": {
+                        "type": "string"
+                    },
+                    "explode": {
+                        "type": "boolean"
+                    },
+                    "allowReserved": {
+                        "type": "boolean",
+                        "default": false
+                    },
+                    "schema": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/definitions/Schema"
+                            },
+                            {
+                                "$ref": "#/definitions/Reference"
+                            }
+                        ]
+                    },
+                    "content": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "$ref": "#/definitions/MediaType"
+                        },
+                        "minProperties": 1,
+                        "maxProperties": 1
+                    },
+                    "example": {},
+                    "examples": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "oneOf": [
+                                {
+                                    "$ref": "#/definitions/Example"
+                                },
+                                {
+                                    "$ref": "#/definitions/Reference"
+                                }
+                            ]
+                        }
+                    }
+                },
+                "patternProperties": {
+                    "^x-": {}
+                },
+                "additionalProperties": false,
+                "required": [
+                    "name",
+                    "in"
+                ],
+                "allOf": [
+                    {
+                        "$ref": "#/definitions/ExampleXORExamples"
+                    },
+                    {
+                        "$ref": "#/definitions/SchemaXORContent"
+                    },
+                    {
+                        "$ref": "#/definitions/ParameterLocation"
+                    }
+                ]
+            },
+            "ParameterLocation": {
+                "description": "Parameter location",
+                "oneOf": [
+                    {
+                        "description": "Parameter in path",
+                        "required": [
+                            "required"
+                        ],
+                        "properties": {
+                            "in": {
+                                "enum": [
+                                    "path"
+                                ]
+                            },
+                            "style": {
+                                "enum": [
+                                    "matrix",
+                                    "label",
+                                    "simple"
+                                ],
+                                "default": "simple"
+                            },
+                            "required": {
+                                "enum": [
+                                    true
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "description": "Parameter in query",
+                        "properties": {
+                            "in": {
+                                "enum": [
+                                    "query"
+                                ]
+                            },
+                            "style": {
+                                "enum": [
+                                    "form",
+                                    "spaceDelimited",
+                                    "pipeDelimited",
+                                    "deepObject"
+                                ],
+                                "default": "form"
+                            }
+                        }
+                    },
+                    {
+                        "description": "Parameter in header",
+                        "properties": {
+                            "in": {
+                                "enum": [
+                                    "header"
+                                ]
+                            },
+                            "style": {
+                                "enum": [
+                                    "simple"
+                                ],
+                                "default": "simple"
+                            }
+                        }
+                    },
+                    {
+                        "description": "Parameter in cookie",
+                        "properties": {
+                            "in": {
+                                "enum": [
+                                    "cookie"
+                                ]
+                            },
+                            "style": {
+                                "enum": [
+                                    "form"
+                                ],
+                                "default": "form"
+                            }
+                        }
+                    }
+                ]
+            },
+            "RequestBody": {
+                "type": "object",
+                "required": [
+                    "content"
+                ],
+                "properties": {
+                    "description": {
+                        "type": "string"
+                    },
+                    "content": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "$ref": "#/definitions/MediaType"
+                        }
+                    },
+                    "required": {
+                        "type": "boolean",
+                        "default": false
+                    }
+                },
+                "patternProperties": {
+                    "^x-": {}
+                },
+                "additionalProperties": false
+            },
+            "SecurityScheme": {
+                "oneOf": [
+                    {
+                        "$ref": "#/definitions/APIKeySecurityScheme"
+                    },
+                    {
+                        "$ref": "#/definitions/HTTPSecurityScheme"
+                    },
+                    {
+                        "$ref": "#/definitions/OAuth2SecurityScheme"
+                    },
+                    {
+                        "$ref": "#/definitions/OpenIdConnectSecurityScheme"
+                    }
+                ]
+            },
+            "APIKeySecurityScheme": {
+                "type": "object",
+                "required": [
+                    "type",
+                    "name",
+                    "in"
+                ],
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "enum": [
+                            "apiKey"
+                        ]
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "in": {
+                        "type": "string",
+                        "enum": [
+                            "header",
+                            "query",
+                            "cookie"
+                        ]
+                    },
+                    "description": {
+                        "type": "string"
+                    }
+                },
+                "patternProperties": {
+                    "^x-": {}
+                },
+                "additionalProperties": false
+            },
+            "HTTPSecurityScheme": {
+                "type": "object",
+                "required": [
+                    "scheme",
+                    "type"
+                ],
+                "properties": {
+                    "scheme": {
+                        "type": "string"
+                    },
+                    "bearerFormat": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "type": {
+                        "type": "string",
+                        "enum": [
+                            "http"
+                        ]
+                    }
+                },
+                "patternProperties": {
+                    "^x-": {}
+                },
+                "additionalProperties": false,
+                "oneOf": [
+                    {
+                        "description": "Bearer",
+                        "properties": {
+                            "scheme": {
+                                "type": "string",
+                                "pattern": "^[Bb][Ee][Aa][Rr][Ee][Rr]$"
+                            }
+                        }
+                    },
+                    {
+                        "description": "Non Bearer",
+                        "not": {
+                            "required": [
+                                "bearerFormat"
+                            ]
+                        },
+                        "properties": {
+                            "scheme": {
+                                "not": {
+                                    "type": "string",
+                                    "pattern": "^[Bb][Ee][Aa][Rr][Ee][Rr]$"
                                 }
                             }
                         }
                     }
-                }
-            ],
-            "required": [
-                "info",
-                "upstream",
-                "server",
-                "middleware"
-            ],
-            "properties": {
-                "info": {
-                    "$id": "#/properties/x-tyk-api-gateway/properties/info",
-                    "type": "object",
-                    "title": "The info schema",
-                    "description": "An explanation about the purpose of this instance.",
-                    "default": {},
-                    "examples": [
-                        {
-                            "id": "6fb1791a8d30482b7238c7ee881d6b13",
-                            "dbId": "62060e6e86341f72ca413229",
-                            "orgId": "change-me-to-org-id",
-                            "name": "test",
-                            "state": {
-                                "active": true
-                            }
-                        }
-                    ],
-                    "required": [
-                        "id",
-                        "dbId",
-                        "orgId",
-                        "name",
-                        "state"
-                    ],
-                    "properties": {
-                        "id": {
-                            "$id": "#/properties/x-tyk-api-gateway/properties/info/properties/id",
-                            "type": "string",
-                            "title": "The id schema",
-                            "description": "An explanation about the purpose of this instance.",
-                            "default": "",
-                            "examples": [
-                                "6fb1791a8d30482b7238c7ee881d6b13"
-                            ]
-                        },
-                        "dbId": {
-                            "$id": "#/properties/x-tyk-api-gateway/properties/info/properties/dbId",
-                            "type": "string",
-                            "title": "The dbId schema",
-                            "description": "An explanation about the purpose of this instance.",
-                            "default": "",
-                            "examples": [
-                                "62060e6e86341f72ca413229"
-                            ]
-                        },
-                        "orgId": {
-                            "$id": "#/properties/x-tyk-api-gateway/properties/info/properties/orgId",
-                            "type": "string",
-                            "title": "The orgId schema",
-                            "description": "An explanation about the purpose of this instance.",
-                            "default": "",
-                            "examples": [
-                                "change-me-to-org-id"
-                            ]
-                        },
-                        "name": {
-                            "$id": "#/properties/x-tyk-api-gateway/properties/info/properties/name",
-                            "type": "string",
-                            "title": "The name schema",
-                            "description": "An explanation about the purpose of this instance.",
-                            "default": "",
-                            "examples": [
-                                "test"
-                            ]
-                        },
-                        "state": {
-                            "$id": "#/properties/x-tyk-api-gateway/properties/info/properties/state",
-                            "type": "object",
-                            "title": "The state schema",
-                            "description": "An explanation about the purpose of this instance.",
-                            "default": {},
-                            "examples": [
-                                {
-                                    "active": true
-                                }
-                            ],
-                            "required": [
-                                "active"
-                            ],
-                            "properties": {
-                                "active": {
-                                    "$id": "#/properties/x-tyk-api-gateway/properties/info/properties/state/properties/active",
-                                    "type": "boolean",
-                                    "title": "The active schema",
-                                    "description": "An explanation about the purpose of this instance.",
-                                    "default": false,
-                                    "examples": [
-                                        true
-                                    ]
-                                }
-                            },
-                            "additionalProperties": true
-                        }
+                ]
+            },
+            "OAuth2SecurityScheme": {
+                "type": "object",
+                "required": [
+                    "type",
+                    "flows"
+                ],
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "enum": [
+                            "oauth2"
+                        ]
                     },
-                    "additionalProperties": true
+                    "flows": {
+                        "$ref": "#/definitions/OAuthFlows"
+                    },
+                    "description": {
+                        "type": "string"
+                    }
                 },
-                "upstream": {
-                    "$id": "#/properties/x-tyk-api-gateway/properties/upstream",
-                    "type": "object",
-                    "title": "The upstream schema",
-                    "description": "An explanation about the purpose of this instance.",
-                    "default": {},
-                    "examples": [
-                        {
-                            "url": "http://httpbin.org/"
-                        }
-                    ],
-                    "required": [
-                        "url"
-                    ],
-                    "properties": {
-                        "url": {
-                            "$id": "#/properties/x-tyk-api-gateway/properties/upstream/properties/url",
-                            "type": "string",
-                            "title": "The url schema",
-                            "description": "An explanation about the purpose of this instance.",
-                            "default": "",
-                            "examples": [
-                                "http://httpbin.org/"
-                            ]
-                        }
-                    },
-                    "additionalProperties": true
+                "patternProperties": {
+                    "^x-": {}
                 },
-                "server": {
-                    "$id": "#/properties/x-tyk-api-gateway/properties/server",
-                    "type": "object",
-                    "title": "The server schema",
-                    "description": "An explanation about the purpose of this instance.",
-                    "default": {},
-                    "examples": [
-                        {
-                            "listenPath": {
-                                "value": "/test/",
-                                "strip": true
-                            },
-                            "slug": "test",
-                            "authentication": {
-                                "enabled": true,
-                                "token": {
-                                    "enabled": true,
-                                    "header": {
-                                        "name": ""
-                                    }
-                                }
-                            }
-                        }
-                    ],
-                    "required": [
-                        "listenPath",
-                        "slug",
-                        "authentication"
-                    ],
-                    "properties": {
-                        "listenPath": {
-                            "$id": "#/properties/x-tyk-api-gateway/properties/server/properties/listenPath",
-                            "type": "object",
-                            "title": "The listenPath schema",
-                            "description": "An explanation about the purpose of this instance.",
-                            "default": {},
-                            "examples": [
-                                {
-                                    "value": "/test/",
-                                    "strip": true
-                                }
-                            ],
-                            "required": [
-                                "value",
-                                "strip"
-                            ],
-                            "properties": {
-                                "value": {
-                                    "$id": "#/properties/x-tyk-api-gateway/properties/server/properties/listenPath/properties/value",
-                                    "type": "string",
-                                    "title": "The value schema",
-                                    "description": "An explanation about the purpose of this instance.",
-                                    "default": "",
-                                    "examples": [
-                                        "/test/"
-                                    ]
-                                },
-                                "strip": {
-                                    "$id": "#/properties/x-tyk-api-gateway/properties/server/properties/listenPath/properties/strip",
-                                    "type": "boolean",
-                                    "title": "The strip schema",
-                                    "description": "An explanation about the purpose of this instance.",
-                                    "default": false,
-                                    "examples": [
-                                        true
-                                    ]
-                                }
-                            },
-                            "additionalProperties": true
-                        },
-                        "slug": {
-                            "$id": "#/properties/x-tyk-api-gateway/properties/server/properties/slug",
-                            "type": "string",
-                            "title": "The slug schema",
-                            "description": "An explanation about the purpose of this instance.",
-                            "default": "",
-                            "examples": [
-                                "test"
-                            ]
-                        },
-                        "authentication": {
-                            "$id": "#/properties/x-tyk-api-gateway/properties/server/properties/authentication",
-                            "type": "object",
-                            "title": "The authentication schema",
-                            "description": "An explanation about the purpose of this instance.",
-                            "default": {},
-                            "examples": [
-                                {
-                                    "enabled": true,
-                                    "token": {
-                                        "enabled": true,
-                                        "header": {
-                                            "name": ""
-                                        }
-                                    }
-                                }
-                            ],
-                            "required": [
-                                "enabled",
-                                "token"
-                            ],
-                            "properties": {
-                                "enabled": {
-                                    "$id": "#/properties/x-tyk-api-gateway/properties/server/properties/authentication/properties/enabled",
-                                    "type": "boolean",
-                                    "title": "The enabled schema",
-                                    "description": "An explanation about the purpose of this instance.",
-                                    "default": false,
-                                    "examples": [
-                                        true
-                                    ]
-                                },
-                                "token": {
-                                    "$id": "#/properties/x-tyk-api-gateway/properties/server/properties/authentication/properties/token",
-                                    "type": "object",
-                                    "title": "The token schema",
-                                    "description": "An explanation about the purpose of this instance.",
-                                    "default": {},
-                                    "examples": [
-                                        {
-                                            "enabled": true,
-                                            "header": {
-                                                "name": ""
-                                            }
-                                        }
-                                    ],
-                                    "required": [
-                                        "enabled",
-                                        "header"
-                                    ],
-                                    "properties": {
-                                        "enabled": {
-                                            "$id": "#/properties/x-tyk-api-gateway/properties/server/properties/authentication/properties/token/properties/enabled",
-                                            "type": "boolean",
-                                            "title": "The enabled schema",
-                                            "description": "An explanation about the purpose of this instance.",
-                                            "default": false,
-                                            "examples": [
-                                                true
-                                            ]
-                                        },
-                                        "header": {
-                                            "$id": "#/properties/x-tyk-api-gateway/properties/server/properties/authentication/properties/token/properties/header",
-                                            "type": "object",
-                                            "title": "The header schema",
-                                            "description": "An explanation about the purpose of this instance.",
-                                            "default": {},
-                                            "examples": [
-                                                {
-                                                    "name": ""
-                                                }
-                                            ],
-                                            "required": [
-                                                "name"
-                                            ],
-                                            "properties": {
-                                                "name": {
-                                                    "$id": "#/properties/x-tyk-api-gateway/properties/server/properties/authentication/properties/token/properties/header/properties/name",
-                                                    "type": "string",
-                                                    "title": "The name schema",
-                                                    "description": "An explanation about the purpose of this instance.",
-                                                    "default": "",
-                                                    "examples": [
-                                                        ""
-                                                    ]
-                                                }
-                                            },
-                                            "additionalProperties": true
-                                        }
-                                    },
-                                    "additionalProperties": true
-                                }
-                            },
-                            "additionalProperties": true
-                        }
+                "additionalProperties": false
+            },
+            "OpenIdConnectSecurityScheme": {
+                "type": "object",
+                "required": [
+                    "type",
+                    "openIdConnectUrl"
+                ],
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "enum": [
+                            "openIdConnect"
+                        ]
                     },
-                    "additionalProperties": true
+                    "openIdConnectUrl": {
+                        "type": "string",
+                        "format": "uri-reference"
+                    },
+                    "description": {
+                        "type": "string"
+                    }
                 },
-                "middleware": {
-                    "$id": "#/properties/x-tyk-api-gateway/properties/middleware",
-                    "type": "object",
-                    "title": "The middleware schema",
-                    "description": "An explanation about the purpose of this instance.",
-                    "default": {},
-                    "examples": [
-                        {
-                            "global": {
-                                "cors": {
-                                    "enabled": true,
-                                    "maxAge": 24,
-                                    "allowedHeaders": [
-                                        "Accept",
-                                        "Content-Type",
-                                        "Origin",
-                                        "X-Requested-With",
-                                        "Authorization"
-                                    ],
-                                    "allowedOrigins": [
-                                        "*"
-                                    ],
-                                    "allowedMethods": [
-                                        "GET",
-                                        "HEAD",
-                                        "POST"
-                                    ]
-                                },
-                                "cache": {
-                                    "enabled": true,
-                                    "timeout": 60
-                                }
-                            },
-                            "operations": {
-                                "getget": {
-                                    "allow": {
-                                        "enabled": true
-                                    }
-                                },
-                                "getstatusid": {
-                                    "allow": {
-                                        "enabled": true
-                                    }
-                                }
-                            }
-                        }
-                    ],
-                    "required": [
-                        "global",
-                        "operations"
-                    ],
-                    "properties": {
-                        "global": {
-                            "$id": "#/properties/x-tyk-api-gateway/properties/middleware/properties/global",
-                            "type": "object",
-                            "title": "The global schema",
-                            "description": "An explanation about the purpose of this instance.",
-                            "default": {},
-                            "examples": [
-                                {
-                                    "cors": {
-                                        "enabled": true,
-                                        "maxAge": 24,
-                                        "allowedHeaders": [
-                                            "Accept",
-                                            "Content-Type",
-                                            "Origin",
-                                            "X-Requested-With",
-                                            "Authorization"
-                                        ],
-                                        "allowedOrigins": [
-                                            "*"
-                                        ],
-                                        "allowedMethods": [
-                                            "GET",
-                                            "HEAD",
-                                            "POST"
-                                        ]
-                                    },
-                                    "cache": {
-                                        "enabled": true,
-                                        "timeout": 60
-                                    }
-                                }
-                            ],
-                            "required": [
-                                "cors",
-                                "cache"
-                            ],
-                            "properties": {
-                                "cors": {
-                                    "$id": "#/properties/x-tyk-api-gateway/properties/middleware/properties/global/properties/cors",
-                                    "type": "object",
-                                    "title": "The cors schema",
-                                    "description": "An explanation about the purpose of this instance.",
-                                    "default": {},
-                                    "examples": [
-                                        {
-                                            "enabled": true,
-                                            "maxAge": 24,
-                                            "allowedHeaders": [
-                                                "Accept",
-                                                "Content-Type",
-                                                "Origin",
-                                                "X-Requested-With",
-                                                "Authorization"
-                                            ],
-                                            "allowedOrigins": [
-                                                "*"
-                                            ],
-                                            "allowedMethods": [
-                                                "GET",
-                                                "HEAD",
-                                                "POST"
-                                            ]
-                                        }
-                                    ],
-                                    "required": [
-                                        "enabled",
-                                        "maxAge",
-                                        "allowedHeaders",
-                                        "allowedOrigins",
-                                        "allowedMethods"
-                                    ],
-                                    "properties": {
-                                        "enabled": {
-                                            "$id": "#/properties/x-tyk-api-gateway/properties/middleware/properties/global/properties/cors/properties/enabled",
-                                            "type": "boolean",
-                                            "title": "The enabled schema",
-                                            "description": "An explanation about the purpose of this instance.",
-                                            "default": false,
-                                            "examples": [
-                                                true
-                                            ]
-                                        },
-                                        "maxAge": {
-                                            "$id": "#/properties/x-tyk-api-gateway/properties/middleware/properties/global/properties/cors/properties/maxAge",
-                                            "type": "integer",
-                                            "title": "The maxAge schema",
-                                            "description": "An explanation about the purpose of this instance.",
-                                            "default": 0,
-                                            "examples": [
-                                                24
-                                            ]
-                                        },
-                                        "allowedHeaders": {
-                                            "$id": "#/properties/x-tyk-api-gateway/properties/middleware/properties/global/properties/cors/properties/allowedHeaders",
-                                            "type": "array",
-                                            "title": "The allowedHeaders schema",
-                                            "description": "An explanation about the purpose of this instance.",
-                                            "default": [],
-                                            "examples": [
-                                                [
-                                                    "Accept",
-                                                    "Content-Type"
-                                                ]
-                                            ],
-                                            "additionalItems": true,
-                                            "items": {
-                                                "$id": "#/properties/x-tyk-api-gateway/properties/middleware/properties/global/properties/cors/properties/allowedHeaders/items",
-                                                "anyOf": [
-                                                    {
-                                                        "$id": "#/properties/x-tyk-api-gateway/properties/middleware/properties/global/properties/cors/properties/allowedHeaders/items/anyOf/0",
-                                                        "type": "string",
-                                                        "title": "The first anyOf schema",
-                                                        "description": "An explanation about the purpose of this instance.",
-                                                        "default": "",
-                                                        "examples": [
-                                                            "Accept",
-                                                            "Content-Type"
-                                                        ]
-                                                    }
-                                                ]
-                                            }
-                                        },
-                                        "allowedOrigins": {
-                                            "$id": "#/properties/x-tyk-api-gateway/properties/middleware/properties/global/properties/cors/properties/allowedOrigins",
-                                            "type": "array",
-                                            "title": "The allowedOrigins schema",
-                                            "description": "An explanation about the purpose of this instance.",
-                                            "default": [],
-                                            "examples": [
-                                                [
-                                                    "*"
-                                                ]
-                                            ],
-                                            "additionalItems": true,
-                                            "items": {
-                                                "$id": "#/properties/x-tyk-api-gateway/properties/middleware/properties/global/properties/cors/properties/allowedOrigins/items",
-                                                "anyOf": [
-                                                    {
-                                                        "$id": "#/properties/x-tyk-api-gateway/properties/middleware/properties/global/properties/cors/properties/allowedOrigins/items/anyOf/0",
-                                                        "type": "string",
-                                                        "title": "The first anyOf schema",
-                                                        "description": "An explanation about the purpose of this instance.",
-                                                        "default": "",
-                                                        "examples": [
-                                                            "*"
-                                                        ]
-                                                    }
-                                                ]
-                                            }
-                                        },
-                                        "allowedMethods": {
-                                            "$id": "#/properties/x-tyk-api-gateway/properties/middleware/properties/global/properties/cors/properties/allowedMethods",
-                                            "type": "array",
-                                            "title": "The allowedMethods schema",
-                                            "description": "An explanation about the purpose of this instance.",
-                                            "default": [],
-                                            "examples": [
-                                                [
-                                                    "GET",
-                                                    "HEAD"
-                                                ]
-                                            ],
-                                            "additionalItems": true,
-                                            "items": {
-                                                "$id": "#/properties/x-tyk-api-gateway/properties/middleware/properties/global/properties/cors/properties/allowedMethods/items",
-                                                "anyOf": [
-                                                    {
-                                                        "$id": "#/properties/x-tyk-api-gateway/properties/middleware/properties/global/properties/cors/properties/allowedMethods/items/anyOf/0",
-                                                        "type": "string",
-                                                        "title": "The first anyOf schema",
-                                                        "description": "An explanation about the purpose of this instance.",
-                                                        "default": "",
-                                                        "examples": [
-                                                            "GET",
-                                                            "HEAD"
-                                                        ]
-                                                    }
-                                                ]
-                                            }
-                                        }
-                                    },
-                                    "additionalProperties": true
-                                },
-                                "cache": {
-                                    "$id": "#/properties/x-tyk-api-gateway/properties/middleware/properties/global/properties/cache",
-                                    "type": "object",
-                                    "title": "The cache schema",
-                                    "description": "An explanation about the purpose of this instance.",
-                                    "default": {},
-                                    "examples": [
-                                        {
-                                            "enabled": true,
-                                            "timeout": 60
-                                        }
-                                    ],
-                                    "required": [
-                                        "enabled",
-                                        "timeout"
-                                    ],
-                                    "properties": {
-                                        "enabled": {
-                                            "$id": "#/properties/x-tyk-api-gateway/properties/middleware/properties/global/properties/cache/properties/enabled",
-                                            "type": "boolean",
-                                            "title": "The enabled schema",
-                                            "description": "An explanation about the purpose of this instance.",
-                                            "default": false,
-                                            "examples": [
-                                                true
-                                            ]
-                                        },
-                                        "timeout": {
-                                            "$id": "#/properties/x-tyk-api-gateway/properties/middleware/properties/global/properties/cache/properties/timeout",
-                                            "type": "integer",
-                                            "title": "The timeout schema",
-                                            "description": "An explanation about the purpose of this instance.",
-                                            "default": 0,
-                                            "examples": [
-                                                60
-                                            ]
-                                        }
-                                    },
-                                    "additionalProperties": true
-                                }
-                            },
-                            "additionalProperties": true
-                        },
-                        "operations": {
-                            "$id": "#/properties/x-tyk-api-gateway/properties/middleware/properties/operations",
-                            "type": "object",
-                            "title": "The operations schema",
-                            "description": "An explanation about the purpose of this instance.",
-                            "default": {},
-                            "examples": [
-                                {
-                                    "getget": {
-                                        "allow": {
-                                            "enabled": true
-                                        }
-                                    },
-                                    "getstatusid": {
-                                        "allow": {
-                                            "enabled": true
-                                        }
-                                    }
-                                }
-                            ],
-                            "required": [
-                                "getget",
-                                "getstatusid"
-                            ],
-                            "properties": {
-                                "getget": {
-                                    "$id": "#/properties/x-tyk-api-gateway/properties/middleware/properties/operations/properties/getget",
-                                    "type": "object",
-                                    "title": "The getget schema",
-                                    "description": "An explanation about the purpose of this instance.",
-                                    "default": {},
-                                    "examples": [
-                                        {
-                                            "allow": {
-                                                "enabled": true
-                                            }
-                                        }
-                                    ],
-                                    "required": [
-                                        "allow"
-                                    ],
-                                    "properties": {
-                                        "allow": {
-                                            "$id": "#/properties/x-tyk-api-gateway/properties/middleware/properties/operations/properties/getget/properties/allow",
-                                            "type": "object",
-                                            "title": "The allow schema",
-                                            "description": "An explanation about the purpose of this instance.",
-                                            "default": {},
-                                            "examples": [
-                                                {
-                                                    "enabled": true
-                                                }
-                                            ],
-                                            "required": [
-                                                "enabled"
-                                            ],
-                                            "properties": {
-                                                "enabled": {
-                                                    "$id": "#/properties/x-tyk-api-gateway/properties/middleware/properties/operations/properties/getget/properties/allow/properties/enabled",
-                                                    "type": "boolean",
-                                                    "title": "The enabled schema",
-                                                    "description": "An explanation about the purpose of this instance.",
-                                                    "default": false,
-                                                    "examples": [
-                                                        true
-                                                    ]
-                                                }
-                                            },
-                                            "additionalProperties": true
-                                        }
-                                    },
-                                    "additionalProperties": true
-                                },
-                                "getstatusid": {
-                                    "$id": "#/properties/x-tyk-api-gateway/properties/middleware/properties/operations/properties/getstatusid",
-                                    "type": "object",
-                                    "title": "The getstatusid schema",
-                                    "description": "An explanation about the purpose of this instance.",
-                                    "default": {},
-                                    "examples": [
-                                        {
-                                            "allow": {
-                                                "enabled": true
-                                            }
-                                        }
-                                    ],
-                                    "required": [
-                                        "allow"
-                                    ],
-                                    "properties": {
-                                        "allow": {
-                                            "$id": "#/properties/x-tyk-api-gateway/properties/middleware/properties/operations/properties/getstatusid/properties/allow",
-                                            "type": "object",
-                                            "title": "The allow schema",
-                                            "description": "An explanation about the purpose of this instance.",
-                                            "default": {},
-                                            "examples": [
-                                                {
-                                                    "enabled": true
-                                                }
-                                            ],
-                                            "required": [
-                                                "enabled"
-                                            ],
-                                            "properties": {
-                                                "enabled": {
-                                                    "$id": "#/properties/x-tyk-api-gateway/properties/middleware/properties/operations/properties/getstatusid/properties/allow/properties/enabled",
-                                                    "type": "boolean",
-                                                    "title": "The enabled schema",
-                                                    "description": "An explanation about the purpose of this instance.",
-                                                    "default": false,
-                                                    "examples": [
-                                                        true
-                                                    ]
-                                                }
-                                            },
-                                            "additionalProperties": true
-                                        }
-                                    },
-                                    "additionalProperties": true
-                                }
-                            },
-                            "additionalProperties": true
-                        }
+                "patternProperties": {
+                    "^x-": {}
+                },
+                "additionalProperties": false
+            },
+            "OAuthFlows": {
+                "type": "object",
+                "properties": {
+                    "implicit": {
+                        "$ref": "#/definitions/ImplicitOAuthFlow"
                     },
-                    "additionalProperties": true
+                    "password": {
+                        "$ref": "#/definitions/PasswordOAuthFlow"
+                    },
+                    "clientCredentials": {
+                        "$ref": "#/definitions/ClientCredentialsFlow"
+                    },
+                    "authorizationCode": {
+                        "$ref": "#/definitions/AuthorizationCodeOAuthFlow"
+                    }
+                },
+                "patternProperties": {
+                    "^x-": {}
+                },
+                "additionalProperties": false
+            },
+            "ImplicitOAuthFlow": {
+                "type": "object",
+                "required": [
+                    "authorizationUrl",
+                    "scopes"
+                ],
+                "properties": {
+                    "authorizationUrl": {
+                        "type": "string",
+                        "format": "uri-reference"
+                    },
+                    "refreshUrl": {
+                        "type": "string",
+                        "format": "uri-reference"
+                    },
+                    "scopes": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "patternProperties": {
+                    "^x-": {}
+                },
+                "additionalProperties": false
+            },
+            "PasswordOAuthFlow": {
+                "type": "object",
+                "required": [
+                    "tokenUrl",
+                    "scopes"
+                ],
+                "properties": {
+                    "tokenUrl": {
+                        "type": "string",
+                        "format": "uri-reference"
+                    },
+                    "refreshUrl": {
+                        "type": "string",
+                        "format": "uri-reference"
+                    },
+                    "scopes": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "patternProperties": {
+                    "^x-": {}
+                },
+                "additionalProperties": false
+            },
+            "ClientCredentialsFlow": {
+                "type": "object",
+                "required": [
+                    "tokenUrl",
+                    "scopes"
+                ],
+                "properties": {
+                    "tokenUrl": {
+                        "type": "string",
+                        "format": "uri-reference"
+                    },
+                    "refreshUrl": {
+                        "type": "string",
+                        "format": "uri-reference"
+                    },
+                    "scopes": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "patternProperties": {
+                    "^x-": {}
+                },
+                "additionalProperties": false
+            },
+            "AuthorizationCodeOAuthFlow": {
+                "type": "object",
+                "required": [
+                    "authorizationUrl",
+                    "tokenUrl",
+                    "scopes"
+                ],
+                "properties": {
+                    "authorizationUrl": {
+                        "type": "string",
+                        "format": "uri-reference"
+                    },
+                    "tokenUrl": {
+                        "type": "string",
+                        "format": "uri-reference"
+                    },
+                    "refreshUrl": {
+                        "type": "string",
+                        "format": "uri-reference"
+                    },
+                    "scopes": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "patternProperties": {
+                    "^x-": {}
+                },
+                "additionalProperties": false
+            },
+            "Link": {
+                "type": "object",
+                "properties": {
+                    "operationId": {
+                        "type": "string"
+                    },
+                    "operationRef": {
+                        "type": "string",
+                        "format": "uri-reference"
+                    },
+                    "parameters": {
+                        "type": "object",
+                        "additionalProperties": {}
+                    },
+                    "requestBody": {},
+                    "description": {
+                        "type": "string"
+                    },
+                    "server": {
+                        "$ref": "#/definitions/Server"
+                    }
+                },
+                "patternProperties": {
+                    "^x-": {}
+                },
+                "additionalProperties": false,
+                "not": {
+                    "description": "Operation Id and Operation Ref are mutually exclusive",
+                    "required": [
+                        "operationId",
+                        "operationRef"
+                    ]
                 }
             },
-            "additionalProperties": true
+            "Callback": {
+                "type": "object",
+                "additionalProperties": {
+                    "$ref": "#/definitions/PathItem"
+                },
+                "patternProperties": {
+                    "^x-": {}
+                }
+            },
+            "Encoding": {
+                "type": "object",
+                "properties": {
+                    "contentType": {
+                        "type": "string"
+                    },
+                    "headers": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "oneOf": [
+                                {
+                                    "$ref": "#/definitions/Header"
+                                },
+                                {
+                                    "$ref": "#/definitions/Reference"
+                                }
+                            ]
+                        }
+                    },
+                    "style": {
+                        "type": "string",
+                        "enum": [
+                            "form",
+                            "spaceDelimited",
+                            "pipeDelimited",
+                            "deepObject"
+                        ]
+                    },
+                    "explode": {
+                        "type": "boolean"
+                    },
+                    "allowReserved": {
+                        "type": "boolean",
+                        "default": false
+                    }
+                },
+                "additionalProperties": false
+            },
+            "X-Tyk-ServiceDiscovery": {
+                "type": "object",
+                "properties": {
+                    "enabled": {
+                        "type": "boolean"
+                    },
+                    "queryEndpoint": {
+                        "type": "string"
+                    },
+                    "dataPath": {
+                        "type": "string"
+                    },
+                    "useNestedQuery": {
+                        "type": "boolean"
+                    },
+                    "parentDataPath": {
+                        "type": "string"
+                    },
+                    "portDataPath": {
+                        "type": "string"
+                    },
+                    "useTargetList": {
+                        "type": "boolean"
+                    },
+                    "cacheTimeout": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "targetPath": {
+                        "type": "string"
+                    },
+                    "endpointReturnsList": {
+                        "type": "boolean"
+                    }
+                },
+                "required": [
+                    "enabled"
+                ]
+            },
+            "X-Tyk-AuthSource": {
+                "type": "object",
+                "properties": {
+                    "enabled": {
+                        "type": "boolean"
+                    },
+                    "name": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "enabled"
+                ]
+            },
+            "X-Tyk-MutualTLS": {
+                "type": "object",
+                "properties": {
+                    "enabled": {
+                        "type": "boolean"
+                    },
+                    "domainToCertificateMapping": {
+                        "type": "array",
+                        "items": [
+                            {
+                                "$ref": "#/definitions/X-Tyk-DomainToCertificate"
+                            }
+                        ]
+                    }
+                }
+            },
+            "X-Tyk-DomainToCertificate": {
+                "type": "object",
+                "properties": {
+                    "domain": {
+                        "type": "string"
+                    },
+                    "certificate": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "domain",
+                    "certificate"
+                ]
+            },
+            "X-Tyk-CertificatePinning": {
+                "type": "object",
+                "properties": {
+                    "enabled": {
+                        "type": "boolean"
+                    },
+                    "domainToPublicKeysMapping": {
+                        "type": "array",
+                        "items": [
+                            {
+                                "$ref": "#/definitions/X-Tyk-PinnedPublicKeys"
+                            }
+                        ]
+                    }
+                }
+            },
+            "X-Tyk-PinnedPublicKeys": {
+                "type": "object",
+                "properties": {
+                    "domain": {
+                        "type": "string"
+                    },
+                    "publicKeys": {
+                        "type": "array",
+                        "items": [
+                            {
+                                "type": "string"
+                            }
+                        ]
+                    }
+                }
+            },
+            "X-Tyk-ClientToPolicy": {
+                "type": "object",
+                "properties": {
+                    "clientId": {
+                        "type": "string"
+                    },
+                    "policyId": {
+                        "type": "string"
+                    }
+                }
+            },
+            "X-Tyk-Provider": {
+                "type": "object",
+                "properties": {
+                    "issuer": {
+                        "type": "string"
+                    },
+                    "clientToPolicyMapping": {
+                        "type": "array",
+                        "items": [
+                            {
+                                "$ref": "#/definitions/X-Tyk-ClientToPolicy"
+                            }
+                        ]
+                    }
+                }
+            },
+            "X-Tyk-ScopeToPolicy": {
+                "type": "object",
+                "properties": {
+                    "scope": {
+                        "type": "string"
+                    },
+                    "policyId": {
+                        "type": "string"
+                    }
+                }
+            },
+            "X-Tyk-Scopes": {
+                "type": "object",
+                "properties": {
+                    "claimName": {
+                        "type": "string"
+                    },
+                    "scopeToPolicyMapping": {
+                        "type": "array",
+                        "items": [
+                            {
+                                "$ref": "#/definitions/X-Tyk-ScopeToPolicy"
+                            }
+                        ]
+                    }
+                }
+            },
+            "X-Tyk-ClientCertificates": {
+                "type": "object",
+                "properties": {
+                    "enabled": {
+                        "type": "boolean"
+                    },
+                    "allowlist": {
+                        "type": "array",
+                        "items": [
+                            {
+                                "type": "string"
+                            }
+                        ]
+                    }
+                }
+            },
+            "X-Tyk-CORS": {
+                "type": "object",
+                "properties": {
+                    "enabled": {
+                        "type": "boolean"
+                    },
+                    "maxAge": {
+                        "type": "integer"
+                    },
+                    "allowCredentials": {
+                        "type": "boolean"
+                    },
+                    "exposedHeaders": {
+                        "type": "array",
+                        "items": [
+                            {
+                                "type": "string"
+                            }
+                        ]
+                    },
+                    "allowedHeaders": {
+                        "type": "array",
+                        "items": [
+                            {
+                                "type": "string"
+                            }
+                        ]
+                    },
+                    "optionsPassthrough": {
+                        "type": "boolean"
+                    },
+                    "debug": {
+                        "type": "boolean"
+                    },
+                    "allowedOrigins": {
+                        "type": "array",
+                        "items": [
+                            {
+                                "type": "string"
+                            }
+                        ]
+                    },
+                    "allowedMethods": {
+                        "type": "array",
+                        "items": [
+                            {
+                                "type": "string"
+                            }
+                        ]
+                    }
+                },
+                "required": [
+                    "enabled"
+                ]
+            },
+            "X-Tyk-Cache": {
+                "type": "object",
+                "properties": {
+                    "enabled": {
+                        "type": "boolean"
+                    },
+                    "timeout": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "cacheAllSafeRequests": {
+                        "type": "boolean"
+                    },
+                    "cacheResponseCodes": {
+                        "type": "array",
+                        "items": [
+                            {
+                                "type": "integer"
+                            }
+                        ]
+                    },
+                    "cacheByHeaders": {
+                        "type": "array",
+                        "items": [
+                            {
+                                "type": "string"
+                            }
+                        ]
+                    },
+                    "enableUpstreamCacheControl": {
+                        "type": "boolean"
+                    },
+                    "controlTTLHeaderName": {
+                        "type": "string"
+                    }
+                }
+            },
+            "X-Tyk-Global": {
+                "type": "object",
+                "properties": {
+                    "cors": {
+                        "$ref": "#/definitions/X-Tyk-CORS"
+                    },
+                    "cache": {
+                        "$ref": "#/definitions/X-Tyk-Cache"
+                    }
+                }
+            },
+            "X-Tyk-Allowance": {
+                "type": "object",
+                "properties": {
+                    "enabled": {
+                        "type": "boolean"
+                    },
+                    "ignoreCase": {
+                        "type": "boolean"
+                    }
+                },
+                "required": [
+                    "enabled"
+                ]
+            },
+            "X-Tyk-TransformRequestMethod": {
+                "type": "object",
+                "properties": {
+                    "enabled": {
+                        "type": "boolean"
+                    },
+                    "toMethod": {
+                        "type": "boolean"
+                    }
+                },
+                "required": [
+                    "enabled",
+                    "toMethod"
+                ]
+            },
+            "X-Tyk-CachePlugin": {
+                "type": "object",
+                "properties": {
+                    "enabled": {
+                        "type": "boolean"
+                    },
+                    "cacheByRegex": {
+                        "type": "string"
+                    },
+                    "cacheResponseCodes": {
+                        "type": "array",
+                        "items": [
+                            {
+                                "type": "integer"
+                            }
+                        ]
+                    }
+                },
+                "required": [
+                    "enabled"
+                ]
+            },
+            "X-Tyk-EnforceTimeout": {
+                "type": "object",
+                "properties": {
+                    "enabled": {
+                        "type": "boolean"
+                    },
+                    "value": {
+                        "type": "integer"
+                    }
+                },
+                "required": [
+                    "enabled",
+                    "value"
+                ]
+            },
+            "X-Tyk-ValidateRequest": {
+                "type": "object",
+                "properties": {
+                    "enabled": {
+                        "type": "boolean"
+                    },
+                    "errorResponseCode": {
+                        "type": "integer"
+                    }
+                },
+                "required": [
+                    "enabled"
+                ]
+            },
+            "X-Tyk-Operation": {
+                "type": "object",
+                "properties": {
+                    "allow": {
+                        "$ref": "#/definitions/X-Tyk-Allowance"
+                    },
+                    "block": {
+                        "$ref": "#/definitions/X-Tyk-Allowance"
+                    },
+                    "ignoreAuthentication": {
+                        "$ref": "#/definitions/X-Tyk-Allowance"
+                    },
+                    "transformRequestMethod": {
+                        "$ref": "#/definitions/X-Tyk-TransformRequestMethod"
+                    },
+                    "cache": {
+                        "$ref": "#/definitions/X-Tyk-CachePlugin"
+                    },
+                    "enforceTimeout": {
+                        "$ref": "#/definitions/X-Tyk-EnforceTimeout"
+                    },
+                    "validateRequest": {
+                        "$ref": "#/definitions/X-Tyk-ValidateRequest"
+                    }
+                }
+            },
+            "X-Tyk-Operations": {
+                "type": "object",
+                "patternProperties": {
+                    "\\S+": {
+                        "$ref": "#/definitions/X-Tyk-Operation"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "X-Tyk-Middleware": {
+                "type": "object",
+                "properties": {
+                    "global": {
+                        "$ref": "#/definitions/X-Tyk-Global"
+                    },
+                    "operations": {
+                        "$ref": "#/definitions/X-Tyk-Operations"
+                    }
+                }
+            },
+            "X-Tyk-ListenPath": {
+                "type": "object",
+                "properties": {
+                    "value": {
+                        "type": "string",
+                        "pattern": "\\S+"
+                    },
+                    "strip": {
+                        "type": "boolean"
+                    }
+                },
+                "required": [
+                    "value"
+                ]
+            },
+            "X-Tyk-HMAC": {
+                "type": "object",
+                "properties": {
+                    "enabled": {
+                        "type": "boolean"
+                    },
+                    "header": {
+                        "$ref": "#/definitions/X-Tyk-AuthSource"
+                    },
+                    "cookie": {
+                        "$ref": "#/definitions/X-Tyk-AuthSource"
+                    },
+                    "query": {
+                        "$ref": "#/definitions/X-Tyk-AuthSource"
+                    },
+                    "allowedAlgorithms": {
+                        "type": "array",
+                        "items": [
+                            {
+                                "type": "string"
+                            }
+                        ]
+                    },
+                    "allowedClockSkew": {
+                        "type": "number",
+                        "format": "double"
+                    }
+                },
+                "required": [
+                    "enabled"
+                ]
+            },
+            "X-Tyk-OIDC": {
+                "type": "object",
+                "properties": {
+                    "enabled": {
+                        "type": "boolean"
+                    },
+                    "header": {
+                        "$ref": "#/definitions/X-Tyk-AuthSource"
+                    },
+                    "cookie": {
+                        "$ref": "#/definitions/X-Tyk-AuthSource"
+                    },
+                    "query": {
+                        "$ref": "#/definitions/X-Tyk-AuthSource"
+                    },
+                    "segregateByClientId": {
+                        "type": "boolean"
+                    },
+                    "providers": {
+                        "type": "array",
+                        "items": [
+                            {
+                                "$ref": "#/definitions/X-Tyk-Provider"
+                            }
+                        ]
+                    },
+                    "scopes": {
+                        "$ref": "#/definitions/X-Tyk-Scopes"
+                    }
+                },
+                "required": [
+                    "enabled"
+                ]
+            },
+            "X-Tyk-CustomPlugin": {
+                "type": "object",
+                "properties": {
+                    "enabled": {
+                        "type": "boolean"
+                    },
+                    "header": {
+                        "$ref": "#/definitions/X-Tyk-AuthSource"
+                    },
+                    "cookie": {
+                        "$ref": "#/definitions/X-Tyk-AuthSource"
+                    },
+                    "query": {
+                        "$ref": "#/definitions/X-Tyk-AuthSource"
+                    }
+                },
+                "required": [
+                    "enabled"
+                ]
+            },
+            "X-Tyk-GoPlugin": {
+                "type": "object",
+                "properties": {
+                    "enabled": {
+                        "type": "boolean"
+                    }
+                },
+                "required": [
+                    "enabled"
+                ]
+            },
+            "X-Tyk-Authentication": {
+                "type": "object",
+                "properties": {
+                    "enabled": {
+                        "type": "boolean"
+                    },
+                    "stripAuthorizationData": {
+                        "type": "boolean"
+                    },
+                    "baseIdentityProvider": {
+                        "type": "string",
+                        "enum": [
+                            "auth_token",
+                            "hmac_key",
+                            "basic_auth_user",
+                            "jwt_claim",
+                            "oidc_user",
+                            "oauth_key",
+                            ""
+                        ]
+                    },
+                    "hmac": {
+                        "$ref": "#/definitions/X-Tyk-HMAC"
+                    },
+                    "oidc": {
+                        "$ref": "#/definitions/X-Tyk-OIDC"
+                    },
+                    "goPlugin": {
+                        "$ref": "#/definitions/X-Tyk-GoPlugin"
+                    },
+                    "customPlugin": {
+                        "$ref": "#/definitions/X-Tyk-CustomPlugin"
+                    },
+                    "securitySchemes": {
+                        "type": "object",
+                        "patternProperties": {
+                            "^[a-zA-Z0-9\\.\\-_]+$": {
+                                "anyOf": [
+                                    {
+                                        "$ref": "#/definitions/X-Tyk-Token"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/X-Tyk-JWT"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/X-Tyk-Basic"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/X-Tyk-OAuth"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "required": [
+                    "enabled"
+                ]
+            },
+            "X-Tyk-Server": {
+                "type": "object",
+                "properties": {
+                    "listenPath": {
+                        "$ref": "#/definitions/X-Tyk-ListenPath"
+                    },
+                    "slug": {
+                        "type": "string"
+                    },
+                    "authentication": {
+                        "$ref": "#/definitions/X-Tyk-Authentication"
+                    },
+                    "clientCertificates": {
+                        "$ref": "#/definitions/X-Tyk-ClientCertificates"
+                    },
+                    "gatewayTags": {
+                        "$ref": "#/definitions/X-Tyk-GatewayTags"
+                    },
+                    "customDomain": {
+                        "$ref": "#/definitions/X-Tyk-CustomDomain"
+                    }
+                },
+                "required": [
+                    "listenPath"
+                ]
+            },
+            "X-Tyk-GatewayTags": {
+                "type": "object",
+                "properties": {
+                    "enabled": {
+                        "type": "boolean"
+                    },
+                    "tags": {
+                        "type": "array",
+                        "uniqueItems": true,
+                        "items": [
+                            {
+                                "type": "string"
+                            }
+                        ]
+                    }
+                }
+            },
+            "X-Tyk-Upstream": {
+                "type": "object",
+                "properties": {
+                    "url": {
+                        "type": "string",
+                        "format": "uri-reference"
+                    },
+                    "serviceDiscovery": {
+                        "$ref": "#/definitions/X-Tyk-ServiceDiscovery"
+                    },
+                    "test": {
+                        "type": "object",
+                        "properties": {
+                            "serviceDiscovery": {
+                                "$ref": "#/definitions/X-Tyk-ServiceDiscovery"
+                            }
+                        }
+                    },
+                    "mutualTLS": {
+                        "$ref": "#/definitions/X-Tyk-MutualTLS"
+                    },
+                    "certificatePinning": {
+                        "$ref": "#/definitions/X-Tyk-CertificatePinning"
+                    }
+                },
+                "required": [
+                    "url"
+                ]
+            },
+            "X-Tyk-State": {
+                "type": "object",
+                "properties": {
+                    "active": {
+                        "type": "boolean"
+                    },
+                    "internal": {
+                        "type": "boolean"
+                    }
+                },
+                "required": [
+                    "active"
+                ]
+            },
+            "X-Tyk-Versioning": {
+                "type": "object",
+                "properties": {
+                    "enabled": {
+                        "type": "boolean"
+                    },
+                    "name": {
+                        "type": "string",
+                        "pattern": "\\S+"
+                    },
+                    "default": {
+                        "type": "string",
+                        "pattern": "\\S+"
+                    },
+                    "location": {
+                        "type": "string",
+                        "pattern": "\\S+"
+                    },
+                    "key": {
+                        "type": "string",
+                        "pattern": "\\S+"
+                    },
+                    "versions": {
+                        "type": "array",
+                        "items": [
+                            {
+                                "$ref": "#/definitions/X-Tyk-VersionToID"
+                            }
+                        ]
+                    },
+                    "stripVersioningData": {
+                        "type": "boolean"
+                    }
+                },
+                "required": [
+                    "enabled",
+                    "default",
+                    "location",
+                    "key",
+                    "versions"
+                ]
+            },
+            "X-Tyk-VersionToID": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "pattern": "\\S+"
+                    },
+                    "id": {
+                        "type": "string",
+                        "pattern": "\\S+"
+                    }
+                },
+                "required": [
+                    "name",
+                    "id"
+                ]
+            },
+            "X-Tyk-Info": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "dbId": {
+                        "type": "string"
+                    },
+                    "orgId": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string",
+                        "pattern": "\\S+"
+                    },
+                    "expiration": {
+                        "type": "string"
+                    },
+                    "state": {
+                        "$ref": "#/definitions/X-Tyk-State"
+                    },
+                    "versioning": {
+                        "$ref": "#/definitions/X-Tyk-Versioning"
+                    }
+                },
+                "required": [
+                    "name",
+                    "state"
+                ]
+            },
+            "X-Tyk-ExtractCredentialsFromBody": {
+                "type": "object",
+                "properties": {
+                    "enabled": {
+                        "type": "boolean"
+                    },
+                    "userRegexp": {
+                        "type": "string"
+                    },
+                    "passwordRegexp": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "enabled"
+                ]
+            },
+            "X-Tyk-Notifications": {
+                "type": "object",
+                "properties": {
+                    "sharedSecret": {
+                        "type": "string"
+                    },
+                    "onKeyChangeUrl": {
+                        "type": "string"
+                    }
+                }
+            },
+            "X-Tyk-Signature": {
+                "type": "object",
+                "properties": {
+                    "enabled": {
+                        "type": "boolean"
+                    },
+                    "algorithm": {
+                        "type": "string"
+                    },
+                    "header": {
+                        "type": "string"
+                    },
+                    "query": {
+                        "$ref": "#/definitions/X-Tyk-AuthSource"
+                    },
+                    "secret": {
+                        "type": "string"
+                    },
+                    "allowedClockSkew": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "errorCode": {
+                        "type": "integer"
+                    },
+                    "errorMessage": {
+                        "type": "string"
+                    }
+                }
+            },
+            "X-Tyk-Token": {
+                "type": "object",
+                "properties": {
+                    "enabled": {
+                        "type": "boolean"
+                    },
+                    "header": {
+                        "$ref": "#/definitions/X-Tyk-AuthSource"
+                    },
+                    "cookie": {
+                        "$ref": "#/definitions/X-Tyk-AuthSource"
+                    },
+                    "query": {
+                        "$ref": "#/definitions/X-Tyk-AuthSource"
+                    },
+                    "enableClientCertificate": {
+                        "type": "boolean"
+                    },
+                    "signatureValidation": {
+                        "$ref": "#/definitions/X-Tyk-Signature"
+                    }
+                },
+                "required": [
+                    "enabled"
+                ]
+            },
+            "X-Tyk-JWT": {
+                "type": "object",
+                "properties": {
+                    "enabled": {
+                        "type": "boolean"
+                    },
+                    "header": {
+                        "$ref": "#/definitions/X-Tyk-AuthSource"
+                    },
+                    "cookie": {
+                        "$ref": "#/definitions/X-Tyk-AuthSource"
+                    },
+                    "query": {
+                        "$ref": "#/definitions/X-Tyk-AuthSource"
+                    },
+                    "source": {
+                        "type": "string"
+                    },
+                    "signingMethod": {
+                        "type": "string"
+                    },
+                    "identityBaseField": {
+                        "type": "string"
+                    },
+                    "skipKid": {
+                        "type": "boolean"
+                    },
+                    "policyFieldName": {
+                        "type": "string"
+                    },
+                    "clientBaseField": {
+                        "type": "string"
+                    },
+                    "scopes": {
+                        "$ref": "#/definitions/X-Tyk-Scopes"
+                    },
+                    "defaultPolicies": {
+                        "type": "array",
+                        "items": [
+                            {
+                                "type": "string"
+                            }
+                        ]
+                    },
+                    "issuedAtValidationSkew": {
+                        "type": "integer",
+                        "format": "int64",
+                        "minimum": 0
+                    },
+                    "notBeforeValidationSkew": {
+                        "type": "integer",
+                        "format": "int64",
+                        "minimum": 0
+                    },
+                    "expiresAtValidationSkew": {
+                        "type": "integer",
+                        "format": "int64",
+                        "minimum": 0
+                    }
+                },
+                "required": [
+                    "enabled"
+                ]
+            },
+            "X-Tyk-Basic": {
+                "type": "object",
+                "properties": {
+                    "enabled": {
+                        "type": "boolean"
+                    },
+                    "header": {
+                        "$ref": "#/definitions/X-Tyk-AuthSource"
+                    },
+                    "cookie": {
+                        "$ref": "#/definitions/X-Tyk-AuthSource"
+                    },
+                    "query": {
+                        "$ref": "#/definitions/X-Tyk-AuthSource"
+                    },
+                    "disableCaching": {
+                        "type": "boolean"
+                    },
+                    "cacheTTL": {
+                        "type": "integer"
+                    },
+                    "extractCredentialsFromBody": {
+                        "$ref": "#/definitions/X-Tyk-ExtractCredentialsFromBody"
+                    }
+                },
+                "required": [
+                    "enabled"
+                ]
+            },
+            "X-Tyk-OAuth": {
+                "type": "object",
+                "properties": {
+                    "enabled": {
+                        "type": "boolean"
+                    },
+                    "header": {
+                        "$ref": "#/definitions/X-Tyk-AuthSource"
+                    },
+                    "cookie": {
+                        "$ref": "#/definitions/X-Tyk-AuthSource"
+                    },
+                    "query": {
+                        "$ref": "#/definitions/X-Tyk-AuthSource"
+                    },
+                    "allowedAuthorizeTypes": {
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "enum": [
+                                "code",
+                                "token"
+                            ]
+                        }
+                    },
+                    "refreshToken": {
+                        "type": "boolean"
+                    },
+                    "authLoginRedirect": {
+                        "type": "string"
+                    },
+                    "notifications": {
+                        "$ref": "#/definitions/X-Tyk-Notifications"
+                    }
+                },
+                "required": [
+                    "enabled"
+                ]
+            },
+            "X-Tyk-CustomDomain": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "format": "hostname"
+                    },
+                    "enabled": {
+                        "type": "boolean"
+                    }
+                }
+            }
         }
-    },
-    "additionalProperties": true
-}
+    }
