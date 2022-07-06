@@ -9,10 +9,10 @@
     "description": "The root schema comprises the entire JSON document.",
     "default": {
         "name": "My New Api",
-        "api_id": "mynewpi",
+        "api_id": "mynewapi",
         "org_id": "default",
         "proxy": {
-            "listen_path": "/mynewpi/",
+            "listen_path": "/mynewapi/",
             "target_url": "http://httpbin.org",
             "strip_listen_path": true,
             "preserve_host_header": true
