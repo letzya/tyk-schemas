@@ -1,4 +1,6 @@
+
 # Tyk Schemas
+
 
 **JSON and YAML schemas for various JSON file types used by Tyk products. 
 You can use these schemas in your IDE or favourite editor to get auto-completion and validation of all your Tyk-related configuration files.**
