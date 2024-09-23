@@ -1,0 +1,13 @@
+name: Run on specific comment
+on:
+  issue_comment:
+    types: [created]
+jobs:
+  myJob:
+    runs-on: ubuntu-latest
+    if: contains(github.event.comment.body, '/run')
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+      - name: Run a one-line script
+        run: echo "The specific comment was posted!"
